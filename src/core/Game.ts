@@ -1,0 +1,81 @@
+import { Pawn } from '../pieces/Pawn'
+import { Piece } from '../pieces/Piece'
+import type { Color } from '../types/Color'
+import { Board } from './Board'
+import { Move } from './Move'
+import type { Player } from './Player'
+import { Position } from './Position'
+
+export class Game {
+  private board: Board
+  private players: Player[]
+  private currentTurn: Color
+  private targetEnPassant: Position | null = null
+
+  constructor(player1: Player, player2: Player) {
+    this.board = new Board()
+    this.players = [player1, player2]
+    this.currentTurn = 'white'
+  }
+
+  switchTurn() {
+    this.currentTurn = this.currentTurn === 'white' ? 'black' : 'white'
+  }
+
+  executeMove(from: Position, to: Position) {
+    const piece = this.board.getPieceAt(from)
+    if (!piece) throw new Error('No piece at the source position')
+    if (piece.color !== this.currentTurn) throw new Error('Not your turn')
+
+    const legalMoves = this.getLegalMovesFor(piece)
+    const move = legalMoves.find(m => m.to.equals(to))
+
+    if (!move) throw new Error('Illegal move')
+    
+    this.checkTargetEnPassant(piece, to)
+    move.execute(this.board)
+    this.switchTurn()
+  }
+
+  getLegalMovesFor(piece: Piece): Move[] {
+    let moves = piece.getLegalMoves(this.board)
+
+    if (piece instanceof Pawn) {
+      moves = [...moves, ...this.getEnPassantMoves(piece)]
+    }
+
+    return moves
+  }
+
+  private getEnPassantMoves(piece: Piece) {
+    const moves: Move[] = []
+    const { x, y } = piece.position
+    const direction = this.currentTurn === 'white' ? 1 : -1
+
+    Pawn.SIDE_OFFSETS.forEach(xd => {
+      if (!this.targetEnPassant) return
+      
+      const capture = this.board.getPieceAt(this.targetEnPassant);
+
+      if (piece.isEnemy(capture)) {
+        const newPosition = new Position(x + xd, y + direction);
+
+        moves.push(new Move(piece, newPosition, { capture: true, enPassant: true, capturedPiece: capture }));
+      }
+    });
+
+    return moves
+  }
+
+  private checkTargetEnPassant(piece: Piece, to: Position) {
+    if(piece.constructor.name === "Pawn") {
+      const isDoubleForward = (to.y - piece.position.y) === 2
+      const isEnPassant = !piece.hasMoved && isDoubleForward
+      if (isEnPassant) {
+        this.targetEnPassant = piece.position
+      }
+    } else {
+      this.targetEnPassant = null
+    }
+  }
+}

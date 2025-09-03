@@ -1,0 +1,24 @@
+{
+  "name": "metachess",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/aisevim/metachess#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aisevim/metachess.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aisevim/metachess/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^5.2.2",
+    "eslint": "^9.34.0"
+  }
+}
