@@ -13,22 +13,19 @@ export class Bishop extends Piece {
 
   public getLegalMoves(board: Board): Move[] {
     const moves: Move[] = []
+    const { x, y } = this.position
 
     for (const { dx, dy } of Bishop.DIRECTIONS) {
       for (let step = 1; step < Board.SIZE; step++) {
-        const newPos = new Position(
-          this.position.x + dx * step,
-          this.position.y + dy * step
-        )
-
+        const newPos = new Position(x + dx * step, y + dy * step)
         if (!board.isInside(newPos)) break
 
-        const target = board.getPieceAt(newPos)
-        if (!target) {
+        const piece = board.getPieceAt(newPos)
+        if (!piece) {
           moves.push(new Move(this, newPos))
         } else {
-          if (this.isEnemy(target)) {
-            moves.push(new Move(this, newPos, { capturedPiece: target }))
+          if (this.isEnemy(piece)) {
+            moves.push(new Move(this, newPos, { capturedPiece: piece }))
           }
           break
         }
