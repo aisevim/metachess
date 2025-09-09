@@ -6,10 +6,6 @@ export class Position {
     public y: number,
   ) {}
 
-  isInsideBoard() {
-    return this.x >= 0 && this.x < 8 && this.y >= 0 && this.y < 8
-  }
-
   clone() {
     return new Position(this.x, this.y)
   }

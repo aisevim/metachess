@@ -21,12 +21,12 @@ export class Pawn extends Piece {
 
     const forward = new Position(x, y + direction)
     const doubleForward = new Position(x, y + 2 * direction)
-    const canGoForward = forward.isInsideBoard() && !board.getPieceAt(forward)
+    const canGoForward = board.isInside(forward) && !board.getPieceAt(forward)
 
     if (canGoForward) {
       moves.push(new Move(this, forward))
 
-      const canGoDoubleForward = !this.hasMoved && doubleForward.isInsideBoard() && !board.getPieceAt(doubleForward)
+      const canGoDoubleForward = !this.hasMoved && board.isInside(doubleForward) && !board.getPieceAt(doubleForward)
       if (canGoDoubleForward) {
         moves.push(new Move(this, doubleForward))
       }

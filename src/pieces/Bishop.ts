@@ -1,4 +1,4 @@
-import type { Board } from '../core/Board'
+import { Board } from '../core/Board'
 import { Move } from '../core/Move'
 import { Position } from '../core/Position'
 import { Piece } from './Piece'
@@ -15,13 +15,13 @@ export class Bishop extends Piece {
     const moves: Move[] = []
 
     for (const { dx, dy } of Bishop.DIRECTIONS) {
-      for (let step = 1; step < 8; step++) {
+      for (let step = 1; step < Board.SIZE; step++) {
         const newPos = new Position(
           this.position.x + dx * step,
           this.position.y + dy * step
         )
 
-        if (!newPos.isInsideBoard()) break
+        if (!board.isInside(newPos)) break
 
         const target = board.getPieceAt(newPos)
         if (!target) {

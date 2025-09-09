@@ -2,6 +2,7 @@ import type { Piece } from '../pieces/Piece'
 import type { Position } from './Position'
 
 export class Board {
+  public static readonly SIZE = 8
   private grid: (Piece | null)[][]
 
   constructor() {
@@ -9,7 +10,7 @@ export class Board {
   }
 
   private createEmptyBoard() {
-    return Array.from({ length: 8 }, () => Array.from<Piece | null>({ length: 8 }).fill(null))
+    return Array.from({ length: Board.SIZE }, () => Array.from<Piece | null>({ length: Board.SIZE }).fill(null))
   }
 
   getPieceAt(pos: Position) {
@@ -24,7 +25,12 @@ export class Board {
     this.grid[pos.y][pos.x] = null
   }
 
-  isOutsideBoard(from: Position, to: Position) {
-    return !from.isInsideBoard() || !to.isInsideBoard()
+  isInside(pos: Position) {
+    return (
+      pos.x >= 0 &&
+      pos.y >= 0 &&
+      pos.x < Board.SIZE &&
+      pos.y < Board.SIZE
+    )
   }
 }
