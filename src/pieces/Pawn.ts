@@ -44,7 +44,7 @@ export class Pawn extends Piece {
       const capture = board.getPieceAt(capturePosition)
 
       if (this.isEnemy(capture)) {
-        moves.push(new Move(this, capturePosition, { capture: true, capturedPiece: capture }));
+        moves.push(new Move(this, capturePosition, { capturedPiece: capture }));
       }
     })
 

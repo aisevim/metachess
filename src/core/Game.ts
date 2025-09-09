@@ -37,11 +37,15 @@ export class Game {
     this.switchTurn()
   }
 
-  getLegalMovesFor(piece: Piece): Move[] {
+  private getLegalMovesFor(piece: Piece): Move[] {
     let moves = piece.getLegalMoves(this.board)
 
     if (piece instanceof Pawn) {
-      moves = [...moves, ...this.getEnPassantMoves(piece)]
+      moves = [
+        ...moves,
+        ...this.getEnPassantMoves(piece),
+        ...this.getPromotionMoves(piece, piece.position)
+      ]
     }
 
     return moves
@@ -49,18 +53,17 @@ export class Game {
 
   private getEnPassantMoves(piece: Piece) {
     const moves: Move[] = []
+    if (!this.targetEnPassant) return moves;
+
     const { x, y } = piece.position
     const direction = this.currentTurn === 'white' ? 1 : -1
 
     Pawn.SIDE_OFFSETS.forEach(xd => {
-      if (!this.targetEnPassant) return
-      
-      const capture = this.board.getPieceAt(this.targetEnPassant);
+      const capturedPiece = this.board.getPieceAt(this.targetEnPassant!);
 
-      if (piece.isEnemy(capture)) {
+      if (piece.isEnemy(capturedPiece)) {
         const newPosition = new Position(x + xd, y + direction);
-
-        moves.push(new Move(piece, newPosition, { capture: true, enPassant: true, capturedPiece: capture }));
+        moves.push(new Move(piece, newPosition, { capturedPiece }));
       }
     });
 
@@ -74,5 +77,20 @@ export class Game {
     } else {
       this.targetEnPassant = null
     }
+  }
+
+  private getPromotionMoves(piece: Piece, to: Position) {
+    const moves: Move[] = []
+    if (!(piece instanceof Pawn)) return moves
+
+    const promotionRank = piece.color === 'white' ? 7 : 0
+
+    if (to.y === promotionRank) {
+      // TODO: allow player choice
+      const promoted = new Pawn(piece.color, piece.position)
+      moves.push(new Move(promoted, to, { capturedPiece: this.board.getPieceAt(to) }))
+    }
+
+    return moves
   }
 }
