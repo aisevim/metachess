@@ -87,7 +87,7 @@ export class Game {
 
     if (to.y === promotionRank) {
       // TODO: allow player choice
-      const promoted = new Pawn(piece.color, piece.position)
+      const promoted = new Pawn(piece.color, to)
       moves.push(new Move(promoted, to, { capturedPiece: this.board.getPieceAt(to) }))
     }
 
