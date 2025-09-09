@@ -1,7 +1,7 @@
 import { SlidingPiece } from './SlidingPiece'
 
 export class Rook extends SlidingPiece {
-  DIRECTIONS = [
+  protected static override readonly DIRECTIONS = [
     { dx: 1, dy: 0 },
     { dx: -1, dy: 0 },
     { dx: 0, dy: 1 },
