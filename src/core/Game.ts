@@ -56,9 +56,9 @@ export class Game {
     if (!this.targetEnPassant) return moves;
 
     const { x, y } = piece.position
-    const direction = this.currentTurn === 'white' ? 1 : -1
+    const direction = this.currentTurn === 'white' ? 1 : -1;
 
-    Pawn.SIDE_OFFSETS.forEach(xd => {
+    [1, -1].forEach(xd => {
       const capturedPiece = this.board.getPieceAt(this.targetEnPassant!);
 
       if (piece.isEnemy(capturedPiece)) {

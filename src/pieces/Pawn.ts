@@ -4,8 +4,6 @@ import { Position } from '../core/Position'
 import { Piece } from './Piece'
 
 export class Pawn extends Piece {
-  public static readonly SIDE_OFFSETS = [1, -1] as const
-
   public getLegalMoves(board: Board) {
     const direction = this.color === 'white' ? 1 : -1
 
@@ -39,7 +37,7 @@ export class Pawn extends Piece {
     const moves: Move[] = []
     const { x, y } = this.position;
 
-    Pawn.SIDE_OFFSETS.forEach(xd => {
+    [1, -1].forEach(xd => {
       const capturePosition = new Position(x + xd, y + direction)
       const capture = board.getPieceAt(capturePosition)
 
