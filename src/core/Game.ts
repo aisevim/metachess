@@ -1,9 +1,9 @@
+import type { Color } from '../types/Color'
+import type { Player } from './Player'
 import { Pawn } from '../pieces/Pawn'
 import { Piece } from '../pieces/Piece'
-import type { Color } from '../types/Color'
 import { Board } from './Board'
 import { Move } from './Move'
-import type { Player } from './Player'
 import { Position } from './Position'
 
 export class Game {
@@ -32,7 +32,7 @@ export class Game {
 
     if (!move) throw new Error('Illegal move')
     
-    this.checkTargetEnPassant(piece, to)
+    this.updateTargetEnPassant(piece, from, to)
     move.execute(this.board)
     this.switchTurn()
   }
@@ -67,13 +67,10 @@ export class Game {
     return moves
   }
 
-  private checkTargetEnPassant(piece: Piece, to: Position) {
-    if(piece.constructor.name === "Pawn") {
-      const isDoubleForward = (to.y - piece.position.y) === 2
-      const isEnPassant = !piece.hasMoved && isDoubleForward
-      if (isEnPassant) {
-        this.targetEnPassant = piece.position
-      }
+  private updateTargetEnPassant(piece: Piece, from: Position, to: Position) {
+    if(piece.constructor.name === "Pawn" && !piece.hasMoved) {
+      const isDoubleForward = Math.abs(to.y - from.y) === 2
+      this.targetEnPassant = isDoubleForward ? to : null
     } else {
       this.targetEnPassant = null
     }
