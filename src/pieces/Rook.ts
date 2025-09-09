@@ -1,7 +1,7 @@
 import { SlidingPiece } from './SlidingPiece'
 
 export class Rook extends SlidingPiece {
-  directions = [
+  DIRECTIONS = [
     { dx: 1, dy: 0 },
     { dx: -1, dy: 0 },
     { dx: 0, dy: 1 },
