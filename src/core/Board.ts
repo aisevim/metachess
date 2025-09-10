@@ -1,5 +1,5 @@
-import type { Piece } from '../pieces/Piece'
-import type { Position } from './Position'
+import type { Piece } from '@/pieces/Piece'
+import type { Position } from '@/core/Position'
 
 export class Board {
   public static readonly SIZE = 8
@@ -27,10 +27,10 @@ export class Board {
 
   isInside(pos: Position) {
     return (
-      pos.x >= 0 &&
-      pos.y >= 0 &&
-      pos.x < Board.SIZE &&
-      pos.y < Board.SIZE
+      pos.x >= 0
+      && pos.y >= 0
+      && pos.x < Board.SIZE
+      && pos.y < Board.SIZE
     )
   }
 }

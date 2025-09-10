@@ -1,6 +1,8 @@
 {
   "name": "metachess",
+  "type": "module",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "author": "",
   "license": "ISC",
@@ -12,13 +14,15 @@
   "bugs": {
     "url": "https://github.com/aisevim/metachess/issues"
   },
-  "main": "index.js",
   "scripts": {
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "test": "vitest"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.2",
-    "eslint": "^9.34.0"
+    "@types/node": "^24.3.1",
+    "eslint": "^9.34.0",
+    "vitest": "^3.2.4"
   }
 }

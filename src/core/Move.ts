@@ -1,6 +1,6 @@
-import type { Piece } from '../pieces/Piece'
-import type { Board } from './Board'
-import { Position } from './Position'
+import type { Piece } from '@/pieces/Piece'
+import type { Board } from '@/core/Board'
+import type { Position } from '@/core/Position'
 
 interface MoveOptions {
   capturedPiece?: Piece | null
@@ -14,13 +14,14 @@ export class Move {
   ) {
     this.options = {
       capturedPiece: null,
-      ...options
+      ...options,
     }
   }
 
   execute(board: Board) {
     const { capturedPiece } = this.options
-    if (capturedPiece) board.removePieceAt(capturedPiece.position)
+    if (capturedPiece)
+      board.removePieceAt(capturedPiece.position)
 
     board.removePieceAt(this.piece.position)
     this.piece.position = this.to

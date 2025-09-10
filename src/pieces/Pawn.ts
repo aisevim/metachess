@@ -1,7 +1,7 @@
-import type { Board } from '../core/Board'
-import { Move } from '../core/Move'
-import { Position } from '../core/Position'
-import { Piece } from './Piece'
+import type { Board } from '@/core/Board'
+import { Move } from '@/core/Move'
+import { Position } from '@/core/Position'
+import { Piece } from '@/pieces/Piece'
 
 export class Pawn extends Piece {
   public getLegalMoves(board: Board) {
@@ -37,12 +37,12 @@ export class Pawn extends Piece {
     const moves: Move[] = []
     const { x, y } = this.position;
 
-    [1, -1].forEach(xd => {
+    [1, -1].forEach((xd) => {
       const capturePosition = new Position(x + xd, y + direction)
       const capture = board.getPieceAt(capturePosition)
 
-      if (this.isEnemy(capture)) {
-        moves.push(new Move(this, capturePosition, { capturedPiece: capture }));
+      if (capture && this.isEnemy(capture)) {
+        moves.push(new Move(this, capturePosition, { capturedPiece: capture }))
       }
     })
 

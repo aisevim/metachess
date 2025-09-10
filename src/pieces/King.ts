@@ -1,4 +1,4 @@
-import { SteppingPiece } from './SteppingPiece'
+import { SteppingPiece } from '@/pieces/SteppingPiece'
 
 export class King extends SteppingPiece {
   protected static override readonly OFFSETS = [

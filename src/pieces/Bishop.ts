@@ -1,4 +1,4 @@
-import { SlidingPiece } from '../pieces/SlidingPiece'
+import { SlidingPiece } from '@/pieces/SlidingPiece'
 
 export class Bishop extends SlidingPiece {
   protected static override readonly DIRECTIONS = [

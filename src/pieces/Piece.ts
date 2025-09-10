@@ -1,7 +1,7 @@
-import type { Board } from '../core/Board'
-import type { Position } from '../core/Position'
-import type { Color } from '../types/Color'
-import { Move } from '../core/Move'
+import type { Board } from '@/core/Board'
+import type { Move } from '@/core/Move'
+import type { Position } from '@/core/Position'
+import type { Color } from '@/types/Color'
 
 export abstract class Piece {
   constructor(

@@ -1,10 +1,15 @@
-import type { Color } from '../types/Color'
-import type { Player } from './Player'
-import { Pawn } from '../pieces/Pawn'
-import { Piece } from '../pieces/Piece'
-import { Board } from './Board'
-import { Move } from './Move'
-import { Position } from './Position'
+import type { Piece } from '@/pieces/Piece'
+import type { Color } from '@/types/Color'
+import type { Player } from '@/core/Player'
+import { Bishop } from '@/pieces/Bishop'
+import { King } from '@/pieces/King'
+import { Knight } from '@/pieces/Knight'
+import { Pawn } from '@/pieces/Pawn'
+import { Queen } from '@/pieces/Queen'
+import { Rook } from '@/pieces/Rook'
+import { Board } from '@/core/Board'
+import { Move } from '@/core/Move'
+import { Position } from '../core/Position'
 
 export class Game {
   private board: Board
@@ -16,6 +21,18 @@ export class Game {
     this.board = new Board()
     this.players = [player1, player2]
     this.currentTurn = 'white'
+    this.initializeBoard()
+  }
+
+  initializeBoard(): void {
+    const backRank = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
+    for (let x = 0; x < Board.SIZE; x++) {
+      this.board.setPieceAt(new Position(x, 0), new backRank[x]('white', new Position(x, 0)))
+      this.board.setPieceAt(new Position(x, 1), new Pawn('white', new Position(x, 1)))
+      this.board.setPieceAt(new Position(x, 6), new Pawn('black', new Position(x, 6)))
+      this.board.setPieceAt(new Position(x, 7), new backRank[x]('black', new Position(x, 7)))
+    }
   }
 
   switchTurn() {
@@ -24,14 +41,17 @@ export class Game {
 
   executeMove(from: Position, to: Position) {
     const piece = this.board.getPieceAt(from)
-    if (!piece) throw new Error('No piece at the source position')
-    if (piece.color !== this.currentTurn) throw new Error('Not your turn')
+    if (!piece)
+      throw new Error('No piece at the source position')
+    if (piece.color !== this.currentTurn)
+      throw new Error('Not your turn')
 
     const legalMoves = this.getLegalMovesFor(piece)
     const move = legalMoves.find(m => m.to.equals(to))
 
-    if (!move) throw new Error('Illegal move')
-    
+    if (!move)
+      throw new Error('Illegal move')
+
     this.updateTargetEnPassant(piece, from, to)
     move.execute(this.board)
     this.switchTurn()
@@ -44,7 +64,7 @@ export class Game {
       moves = [
         ...moves,
         ...this.getEnPassantMoves(piece),
-        ...this.getPromotionMoves(piece, piece.position)
+        ...this.getPromotionMoves(piece, piece.position),
       ]
     }
 
@@ -53,35 +73,38 @@ export class Game {
 
   private getEnPassantMoves(piece: Piece) {
     const moves: Move[] = []
-    if (!this.targetEnPassant) return moves;
+    if (!this.targetEnPassant)
+      return moves
 
     const { x, y } = piece.position
     const direction = this.currentTurn === 'white' ? 1 : -1;
 
-    [1, -1].forEach(xd => {
-      const capturedPiece = this.board.getPieceAt(this.targetEnPassant!);
+    [1, -1].forEach((xd) => {
+      const capturedPiece = this.board.getPieceAt(this.targetEnPassant!)
 
       if (piece.isEnemy(capturedPiece)) {
-        const newPosition = new Position(x + xd, y + direction);
-        moves.push(new Move(piece, newPosition, { capturedPiece }));
+        const newPosition = new Position(x + xd, y + direction)
+        moves.push(new Move(piece, newPosition, { capturedPiece }))
       }
-    });
+    })
 
     return moves
   }
 
   private updateTargetEnPassant(piece: Piece, from: Position, to: Position) {
-    if(piece.constructor.name === "Pawn" && !piece.hasMoved) {
+    if (piece.constructor.name === 'Pawn' && !piece.hasMoved) {
       const isDoubleForward = Math.abs(to.y - from.y) === 2
       this.targetEnPassant = isDoubleForward ? to : null
-    } else {
+    }
+    else {
       this.targetEnPassant = null
     }
   }
 
   private getPromotionMoves(piece: Piece, to: Position) {
     const moves: Move[] = []
-    if (!(piece instanceof Pawn)) return moves
+    if (!(piece instanceof Pawn))
+      return moves
 
     const promotionRank = piece.color === 'white' ? 7 : 0
 
