@@ -79,14 +79,14 @@ export class Game {
     const { x, y } = piece.position
     const direction = this.currentTurn === 'white' ? 1 : -1;
 
-    [1, -1].forEach((xd) => {
-      const capturedPiece = this.board.getPieceAt(this.targetEnPassant!)
+    const target = this.board.getPieceAt(this.targetEnPassant)
+    const isNotAtSide = !target || Math.abs(target.position.x - x) !== 1 || target.position.y !== y
 
-      if (piece.isEnemy(capturedPiece)) {
-        const newPosition = new Position(x + xd, y + direction)
-        moves.push(new Move(piece, newPosition, { capturedPiece }))
-      }
-    })
+    if (!piece.isEnemy(target) || isNotAtSide)
+      return moves
+
+    const newPosition = new Position(target.position.x, y + direction)
+    moves.push(new Move(piece, newPosition, { capturedPiece: target }))
 
     return moves
   }
@@ -115,5 +115,10 @@ export class Game {
     }
 
     return moves
+  }
+
+  // à revoir
+  public getBoardSnapshot(): (Piece | null)[][] {
+    return this.board.toSnapshot().map(row => [...row]);
   }
 }

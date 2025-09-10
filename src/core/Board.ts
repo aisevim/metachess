@@ -25,6 +25,10 @@ export class Board {
     this.grid[pos.y][pos.x] = null
   }
 
+  toSnapshot() {
+    return this.grid.map(row => [...row])
+  }
+
   isInside(pos: Position) {
     return (
       pos.x >= 0
