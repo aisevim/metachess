@@ -1,14 +1,14 @@
+import type { Player } from '@/core/Player'
 import type { Piece } from '@/pieces/Piece'
 import type { Color } from '@/types/Color'
-import type { Player } from '@/core/Player'
+import { Board } from '@/core/Board'
+import { Move } from '@/core/Move'
 import { Bishop } from '@/pieces/Bishop'
 import { King } from '@/pieces/King'
 import { Knight } from '@/pieces/Knight'
 import { Pawn } from '@/pieces/Pawn'
 import { Queen } from '@/pieces/Queen'
 import { Rook } from '@/pieces/Rook'
-import { Board } from '@/core/Board'
-import { Move } from '@/core/Move'
 import { Position } from '../core/Position'
 
 export class Game {
@@ -77,7 +77,7 @@ export class Game {
       return moves
 
     const { x, y } = piece.position
-    const direction = this.currentTurn === 'white' ? 1 : -1;
+    const direction = this.currentTurn === 'white' ? 1 : -1
 
     const target = this.board.getPieceAt(this.targetEnPassant)
     const isNotAtSide = !target || Math.abs(target.position.x - x) !== 1 || target.position.y !== y
@@ -119,6 +119,6 @@ export class Game {
 
   // à revoir
   public getBoardSnapshot(): (Piece | null)[][] {
-    return this.board.toSnapshot().map(row => [...row]);
+    return this.board.toSnapshot().map(row => [...row])
   }
 }

@@ -1,6 +1,6 @@
-import type { Piece } from '@/pieces/Piece'
 import type { Board } from '@/core/Board'
 import type { Position } from '@/core/Position'
+import type { Piece } from '@/pieces/Piece'
 
 interface MoveOptions {
   capturedPiece?: Piece | null

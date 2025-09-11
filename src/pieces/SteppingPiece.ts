@@ -4,13 +4,13 @@ import { Position } from '@/core/Position.ts'
 import { Piece } from '@/pieces/Piece.ts'
 
 export abstract class SteppingPiece extends Piece {
-  protected static readonly OFFSETS: { dx: number, dy: number }[] = []
+  protected abstract readonly OFFSETS: { dx: number, dy: number }[]
 
-  public getLegalMoves(board: Board): Move[] {
+  getLegalMoves(board: Board): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position
 
-    for (const { dx, dy } of SteppingPiece.OFFSETS) {
+    for (const { dx, dy } of this.OFFSETS) {
       const newPos = new Position(x + dx, y + dy)
       if (!board.isInside(newPos))
         continue

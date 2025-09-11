@@ -4,13 +4,13 @@ import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
 export abstract class SlidingPiece extends Piece {
-  protected static readonly DIRECTIONS: { dx: number, dy: number }[] = []
+  protected abstract readonly DIRECTIONS: { dx: number, dy: number }[]
 
   getLegalMoves(board: Board): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position
 
-    for (const { dx, dy } of SlidingPiece.DIRECTIONS) {
+    for (const { dx, dy } of this.DIRECTIONS) {
       for (let step = 1; step < Board.SIZE; step++) {
         const newPos = new Position(x + dx * step, y + dy * step)
         if (!board.isInside(newPos))

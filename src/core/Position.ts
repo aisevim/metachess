@@ -1,19 +1,20 @@
 export type ChessPosition = `${'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'}${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`
 
 export class Position {
-  public x: number;
-  public y: number;
+  public x: number
+  public y: number
 
-  constructor(x: number, y: number);
-  constructor(pos: ChessPosition);
+  constructor(x: number, y: number)
+  constructor(pos: ChessPosition)
   constructor(a: number | ChessPosition, b?: number) {
     if (typeof a === 'string') {
-      const { x, y } = this.toNumeric(a);
-      this.x = x;
-      this.y = y;
-    } else {
-      this.x = a;
-      this.y = b!;
+      const { x, y } = this.toNumeric(a)
+      this.x = x
+      this.y = y
+    }
+    else {
+      this.x = a
+      this.y = b!
     }
   }
 

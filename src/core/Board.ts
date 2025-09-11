@@ -1,5 +1,5 @@
-import type { Piece } from '@/pieces/Piece'
 import type { Position } from '@/core/Position'
+import type { Piece } from '@/pieces/Piece'
 
 export class Board {
   public static readonly SIZE = 8

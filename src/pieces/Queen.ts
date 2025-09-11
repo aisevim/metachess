@@ -1,7 +1,7 @@
 import { SlidingPiece } from '@/pieces/SlidingPiece'
 
 export class Queen extends SlidingPiece {
-  protected static override readonly DIRECTIONS = [
+  protected readonly DIRECTIONS = [
     { dx: 1, dy: 0 },
     { dx: -1, dy: 0 },
     { dx: 0, dy: 1 },
