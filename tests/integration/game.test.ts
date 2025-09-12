@@ -8,16 +8,15 @@ describe('integration', () => {
 
     expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
       "
-      8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-      7   ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-      6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-      5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-      4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-      3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-      2   ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-      1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-          ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+      8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+      7  ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
+      6  - - - - - - - - 
+      5  - - - - - - - - 
+      4  - - - - - - - - 
+      3  - - - - - - - - 
+      2  ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+      1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+         A B C D E F G H 
       "
     `)
   })
@@ -30,16 +29,15 @@ describe('integration', () => {
 
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-          6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-          2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
+          6  - - - - - - - - 
+          5  - - - - - - - - 
+          4  - - - - - - - - 
+          3  - - - ♟ - - - - 
+          2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
       })
@@ -50,16 +48,15 @@ describe('integration', () => {
 
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-          6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
+          6  - - - - - - - - 
+          5  - - - - - - - - 
+          4  - - - ♟ - - - - 
+          3  - - - - - - - - 
+          2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
       })
@@ -80,16 +77,15 @@ describe('integration', () => {
         // initial position
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ♟ ♟ ♟ ♟ ♟ ♟ ﹣ ♟ 
-          6   ﹣ ♙ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♟ ﹣ 
-          2   ♙ ﹣ ♙ ♙ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  ♙ ♙ ♙ ♙ ♙ ♙ - ♙ 
+          6  - ♟ - - - - - - 
+          5  - - - - - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - ♙ - 
+          2  ♟ - ♟ ♟ ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
 
@@ -97,16 +93,15 @@ describe('integration', () => {
         game.executeMove(new Position('f2'), new Position('g3'))
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ♟ ♟ ♟ ♟ ♟ ♟ ﹣ ♟ 
-          6   ﹣ ♙ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♙ ﹣ 
-          2   ♙ ﹣ ♙ ♙ ♙ ﹣ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  ♙ ♙ ♙ ♙ ♙ ♙ - ♙ 
+          6  - ♟ - - - - - - 
+          5  - - - - - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - ♟ - 
+          2  ♟ - ♟ ♟ ♟ - ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
 
@@ -114,16 +109,15 @@ describe('integration', () => {
         game.executeMove(new Position('a7'), new Position('b6'))
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ﹣ ♟ ♟ ♟ ♟ ♟ ﹣ ♟ 
-          6   ﹣ ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♙ ﹣ 
-          2   ♙ ﹣ ♙ ♙ ♙ ﹣ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  - ♙ ♙ ♙ ♙ ♙ - ♙ 
+          6  - ♙ - - - - - - 
+          5  - - - - - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - ♟ - 
+          2  ♟ - ♟ ♟ ♟ - ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
       })
@@ -142,16 +136,15 @@ describe('integration', () => {
         // initial position
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ﹣ ♟ ﹣ ♟ ♟ ♟ ♟ ♟ 
-          6   ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ♟ ♙ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  - ♙ - ♙ ♙ ♙ ♙ ♙ 
+          6  ♙ - - - - - - - 
+          5  - - ♙ ♟ - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - - - 
+          2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
 
@@ -159,16 +152,15 @@ describe('integration', () => {
         game.executeMove(new Position('d5'), new Position('c6'))
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ﹣ ♟ ﹣ ♟ ♟ ♟ ♟ ♟ 
-          6   ♟ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  - ♙ - ♙ ♙ ♙ ♙ ♙ 
+          6  ♙ - ♟ - - - - - 
+          5  - - - - - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - - - 
+          2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
       })
@@ -185,16 +177,15 @@ describe('integration', () => {
         // initial position
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
-          8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-          7   ♟ ♟ ﹣ ♟ ♟ ♟ ♟ ♟ 
-          6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          5   ﹣ ﹣ ♟ ♙ ﹣ ﹣ ﹣ ﹣ 
-          4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-          2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-          1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-              ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+          8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+          7  ♙ ♙ - ♙ ♙ ♙ ♙ ♙ 
+          6  - - - - - - - - 
+          5  - - ♙ ♟ - - - - 
+          4  - - - - - - - - 
+          3  - - - - - - - - 
+          2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+          1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+             A B C D E F G H 
           "
         `)
 
@@ -214,16 +205,15 @@ describe('integration', () => {
 
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ♟ ♟ ♟ ♟ ♟ ♟ ﹣ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♟ ﹣ 
-        4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-        1   ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  ♙ ♙ ♙ ♙ ♙ ♙ - ♙ 
+        6  - - - - - - - - 
+        5  - - - - - - ♙ - 
+        4  - - - - - - - - 
+        3  - - - ♟ - - - - 
+        2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
 
@@ -231,16 +221,15 @@ describe('integration', () => {
       game.executeMove(new Position('c1'), new Position('g5'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ♟ ♟ ♟ ♟ ♟ ♟ ﹣ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♗ ﹣ 
-        4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-        1   ♖ ♘ ﹣ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  ♙ ♙ ♙ ♙ ♙ ♙ - ♙ 
+        6  - - - - - - - - 
+        5  - - - - - - ♝ - 
+        4  - - - - - - - - 
+        3  - - - ♟ - - - - 
+        2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+        1  ♜ ♞ - ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
     })
@@ -261,32 +250,30 @@ describe('integration', () => {
       // init position
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♟ ♟ ♟ ♟ ♟ ♟ ﹣ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♟ 
-        5   ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ♙ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ♖ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ﹣ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-        1   ﹣ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ ♙ ♙ ♙ ♙ - 
+        6  - - - - - - - ♙ 
+        5  ♙ - - - - - - - 
+        4  ♟ - - - - - - - 
+        3  - ♜ - - - - - - 
+        2  - ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+        1  - ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
 
       game.executeMove(new Position('b3'), new Position('b7'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♖ ♟ ♟ ♟ ♟ ♟ ﹣ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ♟ 
-        5   ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ♙ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ﹣ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-        1   ﹣ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♜ ♙ ♙ ♙ ♙ ♙ - 
+        6  - - - - - - - ♙ 
+        5  ♙ - - - - - - - 
+        4  ♟ - - - - - - - 
+        3  - - - - - - - - 
+        2  - ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+        1  - ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
     })
@@ -307,32 +294,30 @@ describe('integration', () => {
       // init position
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ♟ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ♕ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-        1   ♖ ♘ ♗ ﹣ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - - - - - - 
+        4  ♙ - - ♟ - - - - 
+        3  - - ♛ - - - - - 
+        2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ - ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
 
       game.executeMove(new Position('c3'), new Position('c7'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♟ ♕ ♟ ♟ ♟ ♟ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ♟ ﹣ ﹣ ♙ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ﹣ ♙ ♙ ♙ ♙ 
-        1   ♖ ♘ ♗ ﹣ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♛ ♙ ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - - - - - - 
+        4  ♙ - - ♟ - - - - 
+        3  - - - - - - - - 
+        2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ - ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
     })
@@ -349,32 +334,30 @@ describe('integration', () => {
       // init position
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ♟ ♟ ♟ ﹣ ♟ ♟ ♟ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ♟ ﹣ ﹣ ﹣ ﹣ 
-        4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ♘ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-        1   ♖ ﹣ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  ♙ ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - ♙ - - - - 
+        4  - - - - - - - - 
+        3  - - ♞ - - - - - 
+        2  ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+        1  ♜ - ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
 
       game.executeMove(new Position('c3'), new Position('d5'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ♟ ♟ ♟ ﹣ ♟ ♟ ♟ ♟ 
-        6   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ♘ ﹣ ﹣ ﹣ ﹣ 
-        4   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-        1   ♖ ﹣ ♗ ♕ ♔ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  ♙ ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - ♞ - - - - 
+        4  - - - - - - - - 
+        3  - - - - - - - - 
+        2  ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+        1  ♜ - ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
     })
@@ -395,32 +378,30 @@ describe('integration', () => {
       // init position
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♟ ♟ ﹣ ♟ ♟ ♟ ♟ 
-        6   ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ﹣ ﹣ ﹣ ♟ ♙ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ♔ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ♙ ﹣ ♙ ♙ ♙ 
-        1   ♖ ♘ ♗ ♕ ﹣ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  ♙ - - - - - - - 
+        5  - - - - - - - - 
+        4  - - - ♙ ♟ - - - 
+        3  - - - ♚ - - - - 
+        2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ - ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
 
       game.executeMove(new Position('d3'), new Position('d4'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
-        8   ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-        7   ﹣ ♟ ♟ ﹣ ♟ ♟ ♟ ♟ 
-        6   ♟ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        5   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        4   ﹣ ﹣ ﹣ ♔ ♙ ﹣ ﹣ ﹣ 
-        3   ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ ﹣ 
-        2   ♙ ♙ ♙ ♙ ﹣ ♙ ♙ ♙ 
-        1   ♖ ♘ ♗ ♕ ﹣ ♗ ♘ ♖ 
-
-            ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ 
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  ♙ - - - - - - - 
+        5  - - - - - - - - 
+        4  - - - ♚ ♟ - - - 
+        3  - - - - - - - - 
+        2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ - ♝ ♞ ♜ 
+           A B C D E F G H 
         "
       `)
     })
