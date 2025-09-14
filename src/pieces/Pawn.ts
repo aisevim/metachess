@@ -24,11 +24,11 @@ export class Pawn extends Piece {
     const canGoForward = board.isInside(forward) && !board.getPieceAt(forward)
 
     if (canGoForward) {
-      moves.push(new Move(this, forward))
+      moves.push(new Move(this, this.position, forward))
 
       const canGoDoubleForward = !this.hasMoved && board.isInside(doubleForward) && !board.getPieceAt(doubleForward)
       if (canGoDoubleForward) {
-        moves.push(new Move(this, doubleForward))
+        moves.push(new Move(this, this.position, doubleForward))
       }
     }
 
@@ -44,7 +44,7 @@ export class Pawn extends Piece {
       const capture = board.getPieceAt(capturePosition)
 
       if (capture && this.isEnemy(capture)) {
-        moves.push(new Move(this, capturePosition, { capturedPiece: capture }))
+        moves.push(new Move(this, this.position, capturePosition, { capturedPiece: capture }))
       }
     })
 

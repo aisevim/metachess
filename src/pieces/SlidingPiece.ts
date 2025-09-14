@@ -19,11 +19,11 @@ export abstract class SlidingPiece extends Piece {
 
         const piece = board.getPieceAt(newPos)
         if (!piece) {
-          moves.push(new Move(this, newPos))
+          moves.push(new Move(this, this.position, newPos))
         }
         else {
           if (this.isEnemy(piece)) {
-            moves.push(new Move(this, newPos, { capturedPiece: piece }))
+            moves.push(new Move(this, this.position, newPos, { capturedPiece: piece }))
           }
           break
         }
