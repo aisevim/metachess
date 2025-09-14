@@ -1,4 +1,4 @@
-import type { IBoard } from '@/core/IBoard'
+import type { IBoard } from '@/types/interfaces/IBoard'
 import type { LegalMoveContext } from '@/types/Piece'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'

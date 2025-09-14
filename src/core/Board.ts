@@ -1,6 +1,6 @@
-import type { IBoard } from './IBoard'
 import type { Position } from '@/core/Position'
 import type { Piece } from '@/pieces/Piece'
+import type { IBoard } from '@/types/interfaces/IBoard'
 
 export class Board implements IBoard {
   public static readonly SIZE = 8

@@ -1,4 +1,4 @@
-import type { IBoard } from '@/core/IBoard'
+import type { IBoard } from '@/types/interfaces/IBoard'
 import { Board } from '@/core/Board'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'

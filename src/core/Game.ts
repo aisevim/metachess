@@ -1,7 +1,7 @@
-import type { IBoard } from './IBoard'
 import type { Move } from './Move'
 import type { Piece } from '@/pieces/Piece'
 import type { Color } from '@/types/Color'
+import type { IBoard } from '@/types/interfaces/IBoard'
 import { Board } from '@/core/Board'
 import { Bishop } from '@/pieces/Bishop'
 import { King } from '@/pieces/King'

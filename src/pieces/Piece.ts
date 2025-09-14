@@ -1,7 +1,7 @@
-import type { IBoard } from '@/core/IBoard'
 import type { Move } from '@/core/Move'
 import type { Position } from '@/core/Position'
 import type { Color } from '@/types/Color'
+import type { IBoard } from '@/types/interfaces/IBoard'
 import type { LegalMoveContext } from '@/types/Piece'
 
 export abstract class Piece {

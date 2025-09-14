@@ -1,4 +1,4 @@
-import type { IBoard } from '@/core/IBoard'
+import type { IBoard } from '@/types/interfaces/IBoard'
 import { Move } from '@/core/Move.ts'
 import { Position } from '@/core/Position.ts'
 import { Piece } from '@/pieces/Piece.ts'

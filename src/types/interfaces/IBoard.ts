@@ -1,4 +1,4 @@
-import type { Position } from './Position'
+import type { Position } from '@/core/Position'
 import type { Piece } from '@/pieces/Piece'
 
 export interface IBoard {
