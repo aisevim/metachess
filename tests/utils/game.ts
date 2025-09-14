@@ -1,12 +1,11 @@
 import type { ChessPosition } from '@/core/Position'
+import { Board } from '@/core/Board'
 import { Game } from '@/core/Game'
-import { Player } from '@/core/Player'
 import { Position } from '@/core/Position'
 
 export function createGame() {
-  const player1 = new Player()
-  const player2 = new Player()
-  const game = new Game(player1, player2)
+  const board = new Board()
+  const game = new Game(board)
 
   return game
 }
