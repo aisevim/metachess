@@ -1,10 +1,11 @@
-import type { Board } from '@/core/Board'
+import type { IBoard } from '@/core/IBoard'
+import type { LegalMoveContext } from '@/types/Piece'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
 export class Pawn extends Piece {
-  public getLegalMoves(board: Board) {
+  public getLegalMoves(board: IBoard) {
     const direction = this.color === 'white' ? 1 : -1
 
     return [
@@ -13,7 +14,7 @@ export class Pawn extends Piece {
     ]
   }
 
-  private getForwardMoves(board: Board, direction: number): Move[] {
+  private getForwardMoves(board: IBoard, direction: number): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position
 
@@ -33,7 +34,7 @@ export class Pawn extends Piece {
     return moves
   }
 
-  private getDiagonalMoves(board: Board, direction: number): Move[] {
+  private getDiagonalMoves(board: IBoard, direction: number): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position;
 

@@ -1,4 +1,4 @@
-import type { Board } from '@/core/Board'
+import type { IBoard } from '@/core/IBoard'
 import type { Move } from '@/core/Move'
 import type { Position } from '@/core/Position'
 import type { Color } from '@/types/Color'
@@ -10,7 +10,7 @@ export abstract class Piece {
     public hasMoved: boolean = false,
   ) {}
 
-  public abstract getLegalMoves(board: Board): Move[]
+  public abstract getLegalMoves(board: IBoard): Move[]
 
   public moveTo(position: Position) {
     this.position = position

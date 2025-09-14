@@ -1,4 +1,4 @@
-import type { Board } from '@/core/Board.ts'
+import type { IBoard } from '@/core/IBoard'
 import { Move } from '@/core/Move.ts'
 import { Position } from '@/core/Position.ts'
 import { Piece } from '@/pieces/Piece.ts'
@@ -6,7 +6,7 @@ import { Piece } from '@/pieces/Piece.ts'
 export abstract class SteppingPiece extends Piece {
   protected abstract readonly OFFSETS: { dx: number, dy: number }[]
 
-  getLegalMoves(board: Board): Move[] {
+  getLegalMoves(board: IBoard): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position
 

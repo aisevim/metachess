@@ -1,3 +1,4 @@
+import type { IBoard } from '@/core/IBoard'
 import { Board } from '@/core/Board'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'
@@ -6,7 +7,7 @@ import { Piece } from '@/pieces/Piece'
 export abstract class SlidingPiece extends Piece {
   protected abstract readonly DIRECTIONS: { dx: number, dy: number }[]
 
-  getLegalMoves(board: Board): Move[] {
+  getLegalMoves(board: IBoard): Move[] {
     const moves: Move[] = []
     const { x, y } = this.position
 

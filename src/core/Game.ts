@@ -12,14 +12,12 @@ import { Rook } from '@/pieces/Rook'
 import { Position } from '../core/Position'
 
 export class Game {
-  private board: Board
-  private players: Player[]
+  private board: IBoard
   private currentTurn: Color
   private targetEnPassant: Position | null = null
 
-  constructor(player1: Player, player2: Player) {
-    this.board = new Board()
-    this.players = [player1, player2]
+  constructor(board: IBoard) {
+    this.board = board
     this.currentTurn = 'white'
     this.initializeBoard()
   }
