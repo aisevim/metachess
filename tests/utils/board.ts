@@ -1,7 +1,7 @@
 import type { Board } from '@/core/Board'
-import type { ChessPosition } from '@/core/Position'
 import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/Color'
+import type { Color } from '@/types/color'
+import type { ChessPosition } from '@/types/position'
 import { Position } from '@/core/Position'
 
 export function setPiecesAtPositions(

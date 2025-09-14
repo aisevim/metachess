@@ -1,4 +1,4 @@
-export type ChessPosition = `${'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'}${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8}`
+import type { ChessPosition } from '@/types/position'
 
 export class Position {
   public x: number
@@ -8,7 +8,7 @@ export class Position {
   constructor(pos: ChessPosition)
   constructor(a: number | ChessPosition, b?: number) {
     if (typeof a === 'string') {
-      const { x, y } = this.toNumeric(a)
+      const { x, y } = Position.fromAlgebraic(a)
       this.x = x
       this.y = y
     }
@@ -18,26 +18,20 @@ export class Position {
     }
   }
 
-  clone() {
+  clone(): Position {
     return new Position(this.x, this.y)
   }
 
-  equals(other: Position) {
+  equals(other: Position): boolean {
     return this.x === other.x && this.y === other.y
   }
 
-  toAlgebraic(position: Position) {
-    const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-
-    return `${files[position.x]}${position.y + 1}` as ChessPosition
-  }
-
-  toNumeric(position: ChessPosition) {
+  static fromAlgebraic(pos: ChessPosition): { x: number, y: number } {
     const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 
     return {
-      x: files.indexOf(position[0]),
-      y: Number.parseInt(position[1]) - 1,
+      x: files.indexOf(pos[0]),
+      y: Number.parseInt(pos[1], 10) - 1,
     }
   }
 }

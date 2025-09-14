@@ -1,8 +1,7 @@
 import type { Move } from './Move'
-import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/Color'
+import type { Grid } from '@/types/board'
+import type { Color } from '@/types/color'
 import type { IBoard } from '@/types/interfaces/IBoard'
-import { Board } from '@/core/Board'
 import { Bishop } from '@/pieces/Bishop'
 import { King } from '@/pieces/King'
 import { Knight } from '@/pieces/Knight'
@@ -22,10 +21,10 @@ export class Game {
     this.initializeBoard()
   }
 
-  initializeBoard(): void {
+  initializeBoard() {
     const backRank = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
-    for (let x = 0; x < Board.SIZE; x++) {
+    for (let x = 0; x < this.board.size; x++) {
       this.board.setPieceAt(new Position(x, 0), new backRank[x]('white', new Position(x, 0)))
       this.board.setPieceAt(new Position(x, 1), new Pawn('white', new Position(x, 1)))
       this.board.setPieceAt(new Position(x, 6), new Pawn('black', new Position(x, 6)))
@@ -56,7 +55,7 @@ export class Game {
   }
 
   // à revoir
-  public getBoardSnapshot(): (Piece | null)[][] {
+  public getBoardSnapshot(): Grid {
     return this.board.toSnapshot().map(row => [...row])
   }
 }

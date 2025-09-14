@@ -1,20 +1,21 @@
 import type { Position } from '@/core/Position'
 import type { Piece } from '@/pieces/Piece'
+import type { Grid } from '@/types/board'
 import type { IBoard } from '@/types/interfaces/IBoard'
 
 export class Board implements IBoard {
-  public static readonly SIZE = 8
-  private grid: (Piece | null)[][]
+  public readonly size = 8
+  private grid: Grid
 
   constructor() {
     this.grid = this.createEmptyBoard()
   }
 
-  private createEmptyBoard() {
-    return Array.from({ length: Board.SIZE }, () => Array.from<Piece | null>({ length: Board.SIZE }).fill(null))
+  private createEmptyBoard(): Grid {
+    return Array.from({ length: this.size }, () => Array.from<Piece | null>({ length: this.size }).fill(null))
   }
 
-  getPieceAt(pos: Position) {
+  getPieceAt(pos: Position): Piece | null {
     return this.grid[pos.y][pos.x]
   }
 
@@ -26,16 +27,16 @@ export class Board implements IBoard {
     this.grid[pos.y][pos.x] = null
   }
 
-  toSnapshot() {
+  toSnapshot(): Grid {
     return this.grid.map(row => [...row])
   }
 
-  isInside(pos: Position) {
+  isInside(pos: Position): boolean {
     return (
       pos.x >= 0
       && pos.y >= 0
-      && pos.x < Board.SIZE
-      && pos.y < Board.SIZE
+      && pos.x < this.size
+      && pos.y < this.size
     )
   }
 }

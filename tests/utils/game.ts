@@ -1,4 +1,4 @@
-import type { ChessPosition } from '@/core/Position'
+import type { ChessPosition } from '@/types/position'
 import { Board } from '@/core/Board'
 import { Game } from '@/core/Game'
 import { Position } from '@/core/Position'

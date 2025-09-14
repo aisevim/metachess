@@ -1,5 +1,4 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
-import { Board } from '@/core/Board'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
@@ -7,12 +6,12 @@ import { Piece } from '@/pieces/Piece'
 export abstract class SlidingPiece extends Piece {
   protected abstract readonly DIRECTIONS: { dx: number, dy: number }[]
 
-  getLegalMoves(board: IBoard): Move[] {
+  getLegalMoves(board: IBoard) {
     const moves: Move[] = []
     const { x, y } = this.position
 
     for (const { dx, dy } of this.DIRECTIONS) {
-      for (let step = 1; step < Board.SIZE; step++) {
+      for (let step = 1; step < board.size; step++) {
         const newPos = new Position(x + dx * step, y + dy * step)
         if (!board.isInside(newPos))
           break

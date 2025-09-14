@@ -1,4 +1,4 @@
-import type { Color } from '@/types/Color'
+import type { Color } from '@/types/color'
 
 export class Player {
   public name: string = 'Player'
