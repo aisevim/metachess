@@ -2,6 +2,7 @@ import type { IBoard } from '@/core/IBoard'
 import type { Move } from '@/core/Move'
 import type { Position } from '@/core/Position'
 import type { Color } from '@/types/Color'
+import type { LegalMoveContext } from '@/types/Piece'
 
 export abstract class Piece {
   constructor(
@@ -10,7 +11,7 @@ export abstract class Piece {
     public hasMoved: boolean = false,
   ) {}
 
-  public abstract getLegalMoves(board: IBoard): Move[]
+  public abstract getLegalMoves(board: IBoard, context?: LegalMoveContext): Move[]
 
   public moveTo(position: Position) {
     this.position = position
