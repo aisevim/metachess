@@ -1,14 +1,9 @@
 import type { Move } from './Move'
+import type { Position } from '@/core/Position'
 import type { Grid } from '@/types/board'
 import type { Color } from '@/types/color'
 import type { IBoard } from '@/types/interfaces/IBoard'
-import { Bishop } from '@/pieces/Bishop'
-import { King } from '@/pieces/King'
-import { Knight } from '@/pieces/Knight'
-import { Pawn } from '@/pieces/Pawn'
-import { Queen } from '@/pieces/Queen'
-import { Rook } from '@/pieces/Rook'
-import { Position } from '../core/Position'
+import { PieceFactory } from '@/core/PieceFactory'
 
 export class Game {
   private board: IBoard
@@ -37,9 +32,22 @@ export class Game {
     if (!move)
       throw new Error('Illegal move')
 
+    this.handleSpecialMove(move)
     move.execute(this.board)
     this.history.push(move)
     this.switchTurn()
+  }
+
+  private handleSpecialMove(move: Move) {
+    if (move.options?.type === 'promotion') {
+      this.handlePromotion(move)
+    }
+  }
+
+  private handlePromotion(move: Move) {
+    // Ask the type of promotion
+    const piece = PieceFactory.createPromotionPiece('queen', move.piece.color, move.piece.position)
+    move.options.promotionPiece = piece
   }
 
   // à revoir

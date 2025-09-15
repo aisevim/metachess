@@ -193,6 +193,35 @@ describe('integration', () => {
         expect(moveToNotAuthorizedPosition).toThrowError('Illegal move')
       })
     })
+
+    it('"en promotion" move', ({ expect }) => {
+      const game = createGame()
+      executeMoves(game, [
+        ['d2', 'd4'],
+        ['a7', 'a6'],
+        ['d4', 'd5'],
+        ['a6', 'a5'],
+        ['d5', 'd6'],
+        ['a5', 'a4'],
+        ['d6', 'c7'],
+        ['a4', 'a3'],
+        ['c7', 'b8'],
+      ])
+
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♛ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ - ♙ ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - - - - - - 
+        4  - - - - - - - - 
+        3  ♙ - - - - - - - 
+        2  ♟ ♟ ♟ - ♟ ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
+        "
+      `)
+    })
   })
 
   describe('bishop', () => {

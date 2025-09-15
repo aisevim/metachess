@@ -1,5 +1,6 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
-import type { LegalMoveContext } from '@/types/Piece'
+import type { MoveType } from '@/types/move'
+import type { LegalMoveContext } from '@/types/piece'
 import { Move } from '@/core/Move'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
@@ -24,11 +25,11 @@ export class Pawn extends Piece {
     const canGoForward = board.isInside(forward) && !board.getPieceAt(forward)
 
     if (canGoForward) {
-      moves.push(new Move(this, this.position, forward))
+      moves.push(new Move(this, this.position, forward, { type: this.determineMoveType(board, forward) }))
 
       const canGoDoubleForward = !this.hasMoved && board.isInside(doubleForward) && !board.getPieceAt(doubleForward)
       if (canGoDoubleForward) {
-        moves.push(new Move(this, this.position, doubleForward))
+        moves.push(new Move(this, this.position, doubleForward, { type: this.determineMoveType(board, doubleForward) }))
       }
     }
 
@@ -44,7 +45,7 @@ export class Pawn extends Piece {
       const capture = board.getPieceAt(capturePosition)
 
       if (capture && this.isEnemy(capture)) {
-        moves.push(new Move(this, this.position, capturePosition, { capturedPiece: capture }))
+        moves.push(new Move(this, this.position, capturePosition, { capturedPiece: capture, type: this.determineMoveType(board, capturePosition) }))
       }
     })
 
@@ -61,14 +62,20 @@ export class Pawn extends Piece {
 
     const isEnemyPawn = lastMove.piece instanceof Pawn && this.isEnemy(lastMove.piece)
     const hasMovedTwoSquaresForward = Math.abs(lastMove.from.y - lastMove.to.y) === 2
-    const isAtSide = Math.abs(lastMove.to.x - x) === 1 && lastMove.to.y === y
+    const isNextTo = Math.abs(lastMove.to.x - x) === 1 && lastMove.to.y === y
 
-    if (!isEnemyPawn || !hasMovedTwoSquaresForward || !isAtSide)
+    if (!isEnemyPawn || !hasMovedTwoSquaresForward || !isNextTo)
       return moves
 
     const newPosition = new Position(lastMove.to.x, y + direction)
-    moves.push(new Move(this, this.position, newPosition, { capturedPiece: lastMove.piece }))
+    moves.push(new Move(this, this.position, newPosition, { capturedPiece: lastMove.piece, type: 'en passant' }))
 
     return moves
+  }
+
+  private determineMoveType(board: IBoard, position: Position): MoveType {
+    const finalRank = this.color === 'white' ? board.size - 1 : 0
+
+    return position.y === finalRank ? 'promotion' : 'normal'
   }
 }
