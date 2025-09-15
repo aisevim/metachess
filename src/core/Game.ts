@@ -18,18 +18,6 @@ export class Game {
   constructor(board: IBoard) {
     this.board = board
     this.currentTurn = 'white'
-    this.initializeBoard()
-  }
-
-  initializeBoard() {
-    const backRank = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-
-    for (let x = 0; x < this.board.size; x++) {
-      this.board.setPieceAt(new Position(x, 0), new backRank[x]('white', new Position(x, 0)))
-      this.board.setPieceAt(new Position(x, 1), new Pawn('white', new Position(x, 1)))
-      this.board.setPieceAt(new Position(x, 6), new Pawn('black', new Position(x, 6)))
-      this.board.setPieceAt(new Position(x, 7), new backRank[x]('black', new Position(x, 7)))
-    }
   }
 
   switchTurn() {

@@ -1,10 +1,10 @@
 import type { ChessPosition } from '@/types/position'
-import { Board } from '@/core/Board'
+import { BoardFactory } from '@/core/BoardFactory'
 import { Game } from '@/core/Game'
 import { Position } from '@/core/Position'
 
 export function createGame() {
-  const board = new Board()
+  const board = BoardFactory.standard()
   const game = new Game(board)
 
   return game
