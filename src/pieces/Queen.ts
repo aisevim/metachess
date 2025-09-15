@@ -1,6 +1,7 @@
 import { SlidingPiece } from '@/pieces/SlidingPiece'
 
 export class Queen extends SlidingPiece {
+  readonly type = 'queen'
   protected readonly DIRECTIONS = [
     { dx: 1, dy: 0 },
     { dx: -1, dy: 0 },

@@ -2,9 +2,11 @@ import type { Move } from '@/core/Move'
 import type { Position } from '@/core/Position'
 import type { Color } from '@/types/color'
 import type { IBoard } from '@/types/interfaces/IBoard'
-import type { LegalMoveContext } from '@/types/Piece'
+import type { LegalMoveContext } from '@/types/piece'
 
 export abstract class Piece {
+  abstract type: string
+
   constructor(
     public color: Color,
     public position: Position,
