@@ -9,6 +9,7 @@ function pieceSymbol(piece: Piece): string {
     Bishop: { white: '♝', black: '♗' },
     Queen: { white: '♛', black: '♕' },
     King: { white: '♚', black: '♔' },
+    PieceMock: { white: '◉', black: '☉' },
   }
 
   const name = piece.constructor.name

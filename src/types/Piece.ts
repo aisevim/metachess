@@ -6,4 +6,5 @@ export type promotionType = 'queen' | 'rook' | 'bishop' | 'knight'
 
 export interface LegalMoveContext {
   history?: Move[]
+  onCastling?: boolean
 }

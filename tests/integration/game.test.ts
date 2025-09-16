@@ -434,5 +434,91 @@ describe('integration', () => {
         "
       `)
     })
+
+    it('should do castle move at king side', ({ expect }) => {
+      const game = createGame()
+      executeMoves(game, [
+        ['e2', 'e4'],
+        ['d7', 'd5'],
+        ['f1', 'd3'],
+        ['d5', 'd4'],
+        ['g1', 'h3'],
+        ['a7', 'a6'],
+      ])
+
+      // init position
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  ♙ - - - - - - - 
+        5  - - - - - - - - 
+        4  - - - ♙ ♟ - - - 
+        3  - - - ♝ - - - ♞ 
+        2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ ♚ - - ♜ 
+           A B C D E F G H 
+        "
+      `)
+
+      executeMoves(game, [['e1', 'g1']])
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  ♙ - - - - - - - 
+        5  - - - - - - - - 
+        4  - - - ♙ ♟ - - - 
+        3  - - - ♝ - - - ♞ 
+        2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
+        1  ♜ ♞ ♝ ♛ - ♜ ♚ - 
+           A B C D E F G H 
+        "
+      `)
+    })
+
+    it('should do castle move at queen side', ({ expect }) => {
+      const game = createGame()
+      executeMoves(game, [
+        ['d2', 'd4'],
+        ['d7', 'd5'],
+        ['c1', 'e3'],
+        ['a7', 'a6'],
+        ['b1', 'a3'],
+        ['a6', 'a5'],
+        ['d1', 'd2'],
+        ['a5', 'a4'],
+      ])
+
+      // init position
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - ♙ - - - - 
+        4  ♙ - - ♟ - - - - 
+        3  ♞ - - - ♝ - - - 
+        2  ♟ ♟ ♟ ♛ ♟ ♟ ♟ ♟ 
+        1  ♜ - - - ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
+        "
+      `)
+
+      executeMoves(game, [['e1', 'c1']])
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - ♙ - - - - 
+        4  ♙ - - ♟ - - - - 
+        3  ♞ - - - ♝ - - - 
+        2  ♟ ♟ ♟ ♛ ♟ ♟ ♟ ♟ 
+        1  - - ♚ ♜ - ♝ ♞ ♜ 
+           A B C D E F G H 
+        "
+      `)
+    })
   })
 })

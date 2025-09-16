@@ -1,3 +1,4 @@
+import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
@@ -10,7 +11,7 @@ describe('pawn legal moves (• moves, x capture)', () => {
   it('moves 1 square forward if already moved, diagonals for capture', ({ expect }) => {
     const board = new Board()
     setPiecesAtPositions(board, Pawn, 'white', ['c2', 'd2'])
-    setPiecesAtPositions(board, Pawn, 'black', ['c3', 'e1'])
+    setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'e1'])
     const selected = board.getPieceAt(new Position('d2'))
 
     // Simulate the pawn already moved
@@ -25,9 +26,9 @@ describe('pawn legal moves (• moves, x capture)', () => {
       6  - - - - - - - -      - - - - - - - - 
       5  - - - - - - - -      - - - - - - - - 
       4  - - - - - - - -      - - - - - - - - 
-      3  - - ♙ - - - - -      - - x • - - - - 
+      3  - - ☉ - - - - -      - - x • - - - - 
       2  - - ♟ ♟ - - - -      - - ♟ ♟ - - - - 
-      1  - - - - ♙ - - -      - - - - ♙ - - - 
+      1  - - - - ☉ - - -      - - - - ☉ - - - 
          A B C D E F G H      A B C D E F G H 
       "
     `)
@@ -37,23 +38,23 @@ describe('pawn legal moves (• moves, x capture)', () => {
   it('moves 1 or 2 squares forward if not moved, diagonals for capture', ({ expect }) => {
     const board = new Board()
     setPiecesAtPositions(board, Pawn, 'white', ['c2', 'd2'])
-    setPiecesAtPositions(board, Pawn, 'black', ['c3', 'e3', 'e1'])
+    setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'e3', 'e1'])
     const selected = board.getPieceAt(new Position('d2'))
     const moves = selected?.getLegalMoves(board)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
-          "
-          8  - - - - - - - -      - - - - - - - - 
-          7  - - - - - - - -      - - - - - - - - 
-          6  - - - - - - - -      - - - - - - - - 
-          5  - - - - - - - -      - - - - - - - - 
-          4  - - - - - - - -      - - - • - - - - 
-          3  - - ♙ - ♙ - - -      - - x • x - - - 
-          2  - - ♟ ♟ - - - -      - - ♟ ♟ - - - - 
-          1  - - - - ♙ - - -      - - - - ♙ - - - 
-             A B C D E F G H      A B C D E F G H 
-          "
-        `)
+      "
+      8  - - - - - - - -      - - - - - - - - 
+      7  - - - - - - - -      - - - - - - - - 
+      6  - - - - - - - -      - - - - - - - - 
+      5  - - - - - - - -      - - - - - - - - 
+      4  - - - - - - - -      - - - • - - - - 
+      3  - - ☉ - ☉ - - -      - - x • x - - - 
+      2  - - ♟ ♟ - - - -      - - ♟ ♟ - - - - 
+      1  - - - - ☉ - - -      - - - - ☉ - - - 
+         A B C D E F G H      A B C D E F G H 
+      "
+    `)
     expect(moves).toHaveLength(4)
   })
 

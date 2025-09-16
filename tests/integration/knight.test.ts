@@ -1,3 +1,4 @@
+import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
@@ -9,7 +10,7 @@ describe('knight legal moves (• moves, x capture)', () => {
   it('shows 7 legal moves (L-shaped) from d4 (1 blocked, 2 captures, 5 free)', ({ expect }) => {
     const board = new Board()
     setPiecesAtPositions(board, Knight, 'white', ['d4', 'c6'])
-    setPiecesAtPositions(board, Knight, 'black', ['b3', 'f5'])
+    setPiecesAtPositions(board, PieceMock, 'black', ['b3', 'f5'])
     const selected = board.getPieceAt(new Position('d4'))
     const moves = selected?.getLegalMoves(board)
 
@@ -18,9 +19,9 @@ describe('knight legal moves (• moves, x capture)', () => {
       8  - - - - - - - -      - - - - - - - - 
       7  - - - - - - - -      - - - - - - - - 
       6  - - ♞ - - - - -      - - ♞ - • - - - 
-      5  - - - - - ♘ - -      - • - - - x - - 
+      5  - - - - - ☉ - -      - • - - - x - - 
       4  - - - ♞ - - - -      - - - ♞ - - - - 
-      3  - ♘ - - - - - -      - x - - - • - - 
+      3  - ☉ - - - - - -      - x - - - • - - 
       2  - - - - - - - -      - - • - • - - - 
       1  - - - - - - - -      - - - - - - - - 
          A B C D E F G H      A B C D E F G H 
