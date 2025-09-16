@@ -6,7 +6,7 @@ import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
 export class Pawn extends Piece {
-  readonly type = 'piece'
+  readonly type = 'pawn'
   public getLegalMoves(board: IBoard, context: LegalMoveContext) {
     const direction = this.color === 'white' ? 1 : -1
 
