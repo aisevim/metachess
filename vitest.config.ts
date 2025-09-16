@@ -6,6 +6,7 @@ export default defineConfig({
   test: {
     alias: {
       '@': resolve(dirname(fileURLToPath(import.meta.url)), 'src'),
+      'tests': resolve(dirname(fileURLToPath(import.meta.url)), 'tests'),
     },
   },
 })
