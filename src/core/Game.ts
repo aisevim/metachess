@@ -1,4 +1,4 @@
-import type { Move } from './Move'
+import type { MoveCommand } from './MoveCommand'
 import type { Position } from '@/core/Position'
 import type { Grid } from '@/types/board'
 import type { Color } from '@/types/color'
@@ -8,7 +8,7 @@ import { PieceFactory } from '@/core/PieceFactory'
 export class Game {
   private board: IBoard
   private currentTurn: Color
-  private history: Move[] = []
+  private history: MoveCommand[] = []
 
   constructor(board: IBoard) {
     this.board = board
@@ -38,13 +38,15 @@ export class Game {
     this.switchTurn()
   }
 
-  private handleSpecialMove(move: Move) {
-    if (move.options?.type === 'promotion') {
+  private handleSpecialMove(move: MoveCommand) {
+    if (move.type === 'promotion') {
       this.handlePromotion(move)
     }
   }
 
-  private handlePromotion(move: Move) {
+  private handlePromotion(move: MoveCommand) {
+    if (!move.options)
+      return
     // Ask the type of promotion
     const piece = PieceFactory.createPromotionPiece('queen', move.piece.color, move.piece.position)
     move.options.promotionPiece = piece

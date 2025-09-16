@@ -1,4 +1,4 @@
-import type { Move } from '@/core/Move'
+import type { MoveCommand } from '@/core/MoveCommand'
 import type { Piece } from '@/pieces/Piece'
 
 function pieceSymbol(piece: Piece): string {
@@ -17,7 +17,7 @@ function pieceSymbol(piece: Piece): string {
   return symbols[name]?.[colorKey] ?? '?'
 }
 
-export function renderGrid(grid: (Piece | null)[][], moves?: Move[]): string {
+export function renderGrid(grid: (Piece | null)[][], moves?: MoveCommand[]): string {
   const size = grid.length
   const cellWidth = 2
   const gap = '     '

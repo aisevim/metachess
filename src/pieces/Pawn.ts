@@ -1,7 +1,7 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
 import type { MoveType } from '@/types/move'
 import type { LegalMoveContext } from '@/types/piece'
-import { Move } from '@/core/Move'
+import { MoveCommand } from '@/core/MoveCommand'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
@@ -17,8 +17,8 @@ export class Pawn extends Piece {
     ]
   }
 
-  private getForwardMoves(board: IBoard, direction: number): Move[] {
-    const moves: Move[] = []
+  private getForwardMoves(board: IBoard, direction: number): MoveCommand[] {
+    const moves: MoveCommand[] = []
     const { x, y } = this.position
 
     const forward = new Position(x, y + direction)
@@ -26,19 +26,19 @@ export class Pawn extends Piece {
     const canGoForward = board.isInside(forward) && !board.getPieceAt(forward)
 
     if (canGoForward) {
-      moves.push(new Move(this, this.position, forward, { type: this.determineMoveType(board, forward) }))
+      moves.push(new MoveCommand(this, this.position, forward, this.determineMoveType(board, forward)))
 
       const canGoDoubleForward = !this.hasMoved && board.isInside(doubleForward) && !board.getPieceAt(doubleForward)
       if (canGoDoubleForward) {
-        moves.push(new Move(this, this.position, doubleForward, { type: this.determineMoveType(board, doubleForward) }))
+        moves.push(new MoveCommand(this, this.position, doubleForward, this.determineMoveType(board, doubleForward)))
       }
     }
 
     return moves
   }
 
-  private getDiagonalMoves(board: IBoard, direction: number): Move[] {
-    const moves: Move[] = []
+  private getDiagonalMoves(board: IBoard, direction: number): MoveCommand[] {
+    const moves: MoveCommand[] = []
     const { x, y } = this.position;
 
     [1, -1].forEach((xd) => {
@@ -46,15 +46,15 @@ export class Pawn extends Piece {
       const capture = board.getPieceAt(capturePosition)
 
       if (capture && this.isEnemy(capture)) {
-        moves.push(new Move(this, this.position, capturePosition, { capturedPiece: capture, type: this.determineMoveType(board, capturePosition) }))
+        moves.push(new MoveCommand(this, this.position, capturePosition, this.determineMoveType(board, capturePosition), { capturedPiece: capture }))
       }
     })
 
     return moves
   }
 
-  private getEnPassantMoves(context: LegalMoveContext, direction: number): Move[] {
-    const moves: Move[] = []
+  private getEnPassantMoves(context: LegalMoveContext, direction: number): MoveCommand[] {
+    const moves: MoveCommand[] = []
     const lastMove = context?.history?.at(-1)
     const { x, y } = this.position
 
@@ -69,7 +69,7 @@ export class Pawn extends Piece {
       return moves
 
     const newPosition = new Position(lastMove.to.x, y + direction)
-    moves.push(new Move(this, this.position, newPosition, { capturedPiece: lastMove.piece, type: 'en passant' }))
+    moves.push(new MoveCommand(this, this.position, newPosition, 'en passant', { capturedPiece: lastMove.piece }))
 
     return moves
   }

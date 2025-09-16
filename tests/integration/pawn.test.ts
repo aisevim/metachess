@@ -3,7 +3,7 @@ import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
 import { Board } from '@/core/Board'
-import { Move } from '@/core/Move'
+import { MoveCommand } from '@/core/MoveCommand'
 import { Position } from '@/core/Position'
 import { Pawn } from '@/pieces/Pawn'
 
@@ -60,13 +60,11 @@ describe('pawn legal moves (• moves, x capture)', () => {
 
   it('handles en passant correctly', ({ expect }) => {
     const context = {
-      history: [new Move(
+      history: [new MoveCommand(
         new Pawn('white', new Position('d4')),
         new Position('d2'),
         new Position('d4'),
-        {
-          capturedPiece: new Pawn('black', new Position('d4')),
-        },
+        'normal',
       )],
     }
     const board = new Board()

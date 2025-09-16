@@ -1,6 +1,6 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
 import type { LegalMoveContext } from '@/types/piece'
-import { Move } from '@/core/Move'
+import { MoveCommand } from '@/core/MoveCommand'
 import { Position } from '@/core/Position'
 import { SteppingPiece } from '@/pieces/SteppingPiece'
 
@@ -17,7 +17,7 @@ export class King extends SteppingPiece {
     { dx: 1, dy: -1 },
   ]
 
-  getLegalMoves(board: IBoard, context?: LegalMoveContext): Move[] {
+  getLegalMoves(board: IBoard, context?: LegalMoveContext): MoveCommand[] {
     const moves = super.getLegalMoves(board)
     const { onCastling } = context ?? {}
 
@@ -28,8 +28,8 @@ export class King extends SteppingPiece {
     return moves
   }
 
-  private getCastlingMoves(board: IBoard): Move[] {
-    const moves: Move[] = []
+  private getCastlingMoves(board: IBoard): MoveCommand[] {
+    const moves: MoveCommand[] = []
     const row = this.position.y
     const enemyColor = this.color === 'white' ? 'black' : 'white'
 
@@ -49,8 +49,7 @@ export class King extends SteppingPiece {
       if (isRookHasMoved || hasEmptySquaresOnPath || isTheSquaresAttackedByEnemy)
         continue
 
-      moves.push(new Move(this, this.position, new Position(config.kingTargetX, row), {
-        type: 'castling',
+      moves.push(new MoveCommand(this, this.position, new Position(config.kingTargetX, row), 'castling', {
         castle: { rookPiece: rook, rookNewPosition: new Position(config.rookTargetX, row) },
       }))
     }

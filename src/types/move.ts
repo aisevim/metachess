@@ -7,8 +7,7 @@ export interface MoveOptions {
   capturedPiece?: Piece | null
   promotionPiece?: Piece | null
   castle?: {
-    rookPiece?: Piece | null
-    rookNewPosition?: Position | null
+    rookPiece: Piece
+    rookNewPosition: Position
   }
-  type?: MoveType
 }
