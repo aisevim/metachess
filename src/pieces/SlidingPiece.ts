@@ -1,5 +1,6 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
 import { MoveCommand } from '@/core/MoveCommand'
+import { NormalMoveStrategy } from '@/core/moves/NormalMoveStrategy'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
@@ -18,11 +19,11 @@ export abstract class SlidingPiece extends Piece {
 
         const piece = board.getPieceAt(newPos)
         if (!piece) {
-          moves.push(new MoveCommand(this, this.position, newPos))
+          moves.push(new MoveCommand(this, this.position, newPos, new NormalMoveStrategy()))
         }
         else {
           if (this.isEnemy(piece)) {
-            moves.push(new MoveCommand(this, this.position, newPos, 'normal', { capturedPiece: piece }))
+            moves.push(new MoveCommand(this, this.position, newPos, new NormalMoveStrategy(), { capturedPiece: piece }))
           }
           break
         }

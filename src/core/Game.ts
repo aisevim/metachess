@@ -4,6 +4,7 @@ import type { Grid } from '@/types/board'
 import type { Color } from '@/types/color'
 import type { IBoard } from '@/types/interfaces/IBoard'
 import { PieceFactory } from '@/core/PieceFactory'
+import { PromotionMoveStrategy } from './moves/PromotionMoveStrategy'
 
 export class Game {
   private board: IBoard
@@ -38,8 +39,17 @@ export class Game {
     this.switchTurn()
   }
 
+  undoMove() {
+    const lastMove = this.history.pop()
+    if (!lastMove)
+      throw new Error('No moves to undo')
+
+    lastMove.undo(this.board)
+    this.switchTurn()
+  }
+
   private handleSpecialMove(move: MoveCommand) {
-    if (move.type === 'promotion') {
+    if (move.strategy instanceof PromotionMoveStrategy) {
       this.handlePromotion(move)
     }
   }

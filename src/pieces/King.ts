@@ -1,6 +1,7 @@
 import type { IBoard } from '@/types/interfaces/IBoard'
 import type { LegalMoveContext } from '@/types/piece'
 import { MoveCommand } from '@/core/MoveCommand'
+import { CaslteMoveStrategy } from '@/core/moves/CastleMoveStrategy'
 import { Position } from '@/core/Position'
 import { SteppingPiece } from '@/pieces/SteppingPiece'
 
@@ -49,7 +50,7 @@ export class King extends SteppingPiece {
       if (isRookHasMoved || hasEmptySquaresOnPath || isTheSquaresAttackedByEnemy)
         continue
 
-      moves.push(new MoveCommand(this, this.position, new Position(config.kingTargetX, row), 'castling', {
+      moves.push(new MoveCommand(this, this.position, new Position(config.kingTargetX, row), new CaslteMoveStrategy(), {
         castle: { rookPiece: rook, rookNewPosition: new Position(config.rookTargetX, row) },
       }))
     }

@@ -1,7 +1,10 @@
+import type { MoveStrategy } from '@/core/moves/MoveStrategy'
 import type { IBoard } from '@/types/interfaces/IBoard'
-import type { MoveType } from '@/types/move'
 import type { LegalMoveContext } from '@/types/piece'
 import { MoveCommand } from '@/core/MoveCommand'
+import { EnPassantMoveStrategy } from '@/core/moves/EnPassantMoveStrategy'
+import { NormalMoveStrategy } from '@/core/moves/NormalMoveStrategy'
+import { PromotionMoveStrategy } from '@/core/moves/PromotionMoveStrategy'
 import { Position } from '@/core/Position'
 import { Piece } from '@/pieces/Piece'
 
@@ -69,14 +72,14 @@ export class Pawn extends Piece {
       return moves
 
     const newPosition = new Position(lastMove.to.x, y + direction)
-    moves.push(new MoveCommand(this, this.position, newPosition, 'en passant', { capturedPiece: lastMove.piece }))
+    moves.push(new MoveCommand(this, this.position, newPosition, new EnPassantMoveStrategy(), { capturedPiece: lastMove.piece }))
 
     return moves
   }
 
-  private determineMoveType(board: IBoard, position: Position): MoveType {
+  private determineMoveType(board: IBoard, position: Position): MoveStrategy {
     const finalRank = this.color === 'white' ? board.size - 1 : 0
 
-    return position.y === finalRank ? 'promotion' : 'normal'
+    return position.y === finalRank ? new PromotionMoveStrategy() : new NormalMoveStrategy()
   }
 }
