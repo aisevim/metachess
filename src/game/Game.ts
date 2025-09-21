@@ -54,7 +54,7 @@ export class Game {
   }
 
   private handleSpecialMove(move: MoveCommand) {
-    if (move.strategy instanceof PromotionMoveExecutor) {
+    if (move.executor instanceof PromotionMoveExecutor) {
       this.handlePromotion(move)
     }
   }

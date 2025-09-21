@@ -21,7 +21,7 @@ export class MoveCommand {
     public piece: Piece,
     public from: Position,
     public to: Position,
-    private strategy: MoveExecutor,
+    private executor: MoveExecutor,
     public options?: MoveOptions,
   ) {
     this.pieceMemento = piece.createMemento()
@@ -31,7 +31,7 @@ export class MoveCommand {
   }
 
   execute(board: IBoard) {
-    this.strategy.execute(this, board)
+    this.executor.execute(this, board)
   }
 
   undo(board: IBoard) {
@@ -41,6 +41,6 @@ export class MoveCommand {
       this.options?.castle?.rookPiece.restoreMemento(this.rookMemento)
     }
 
-    this.strategy.undo(this, board)
+    this.executor.undo(this, board)
   }
 }
