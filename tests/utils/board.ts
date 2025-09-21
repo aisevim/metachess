@@ -1,6 +1,6 @@
 import type { Board } from '@/board/Board'
 import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/color'
+import type { Color } from '@/types/enums/color'
 import type { ChessPosition } from '@/types/position'
 import { Position } from '@/board/Position'
 

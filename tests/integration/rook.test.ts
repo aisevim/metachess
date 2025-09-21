@@ -8,6 +8,7 @@ import { Board } from '@/board/Board'
 import { Position } from '@/board/Position'
 import { RulesEngine } from '@/game/RulesEngine'
 import { Rook } from '@/pieces/types/Rook'
+import { Color } from '@/types/enums/color'
 
 describe('rook legal moves (• moves, x capture)', () => {
   it('moves along ranks and files with captures, blocked by allies, and respects board edges', ({ expect }) => {
@@ -15,8 +16,8 @@ describe('rook legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Rook, 'white', ['d4', 'g4'])
-    setPiecesAtPositions(board, Rook, 'black', ['d7', 'a4', 'h4', 'd8'])
+    setPiecesAtPositions(board, Rook, Color.White, ['d4', 'g4'])
+    setPiecesAtPositions(board, Rook, Color.Black, ['d7', 'a4', 'h4', 'd8'])
 
     attackMap.recomputeAll()
 

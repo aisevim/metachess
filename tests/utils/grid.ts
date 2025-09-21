@@ -1,7 +1,7 @@
 import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/color'
 import type { ChessPosition } from '@/types/position'
 import { Position } from '@/board/Position'
+import { Color } from '@/types/enums/color'
 
 export function createGridWithPieces(
   PieceClass: new (color: Color, position: Position) => Piece,
@@ -15,12 +15,12 @@ export function createGridWithPieces(
 
   for (const pos of setup.white) {
     const p = new Position(pos)
-    grid[p.y][p.x] = new PieceClass('white', p)
+    grid[p.y][p.x] = new PieceClass(Color.White, p)
   }
 
   for (const pos of setup.black) {
     const p = new Position(pos)
-    grid[p.y][p.x] = new PieceClass('black', p)
+    grid[p.y][p.x] = new PieceClass(Color.Black, p)
   }
 
   return grid

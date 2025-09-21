@@ -4,12 +4,13 @@ import type { Piece } from '@/pieces/Piece'
 import { Position } from '@/board/Position'
 import { NormalMoveExecutor } from '@/moves/execution/NormalMoveExecutor'
 import { MoveCommand } from '@/moves/MoveCommand'
+import { Color } from '@/types/enums/color'
 
 export class PawnAttackMap implements AttackMap {
   getAttackMoves(piece: Piece, board: IBoard): MoveCommand[] {
     const moves: MoveCommand[] = []
     const { x, y } = piece.position
-    const direction = piece.color === 'white' ? 1 : -1
+    const direction = piece.color === Color.White ? 1 : -1
 
     const diagonalsOffsets = [1, -1]
     diagonalsOffsets.forEach((xd) => {

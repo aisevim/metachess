@@ -2,9 +2,9 @@ import type { AttackMapManager } from '@/attack/AttackMapManager'
 import type { IBoard } from '@/board/IBoard'
 import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/color'
 import { MoveGeneratorFactory } from '@/moves/generators/MoveGeneratorFactory'
 import { PieceType } from '@/pieces/enums/PieceType'
+import { Color } from '@/types/enums/color'
 
 export class RulesEngine {
   private moveGeneratorFactory: MoveGeneratorFactory
@@ -27,7 +27,7 @@ export class RulesEngine {
     if (!king)
       throw new Error(`No king found for color ${color}`)
 
-    const enemyColor = color === 'white' ? 'black' : 'white'
+    const enemyColor = color === Color.White ? Color.Black : Color.White
     return this.attackMapManager.isSquareAttacked(king.position, enemyColor)
   }
 

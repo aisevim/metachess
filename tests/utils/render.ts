@@ -1,19 +1,20 @@
 import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Piece } from '@/pieces/Piece'
+import { Color } from '@/types/enums/color'
 
 function pieceSymbol(piece: Piece): string {
-  const symbols: Record<string, { white: string, black: string }> = {
-    Pawn: { white: '♟', black: '♙' },
-    Rook: { white: '♜', black: '♖' },
-    Knight: { white: '♞', black: '♘' },
-    Bishop: { white: '♝', black: '♗' },
-    Queen: { white: '♛', black: '♕' },
-    King: { white: '♚', black: '♔' },
-    PieceMock: { white: '◉', black: '☉' },
+  const symbols: Record<string, Record<Color, string>> = {
+    Pawn: { [Color.White]: '♟', [Color.Black]: '♙' },
+    Rook: { [Color.White]: '♜', [Color.Black]: '♖' },
+    Knight: { [Color.White]: '♞', [Color.Black]: '♘' },
+    Bishop: { [Color.White]: '♝', [Color.Black]: '♗' },
+    Queen: { [Color.White]: '♛', [Color.Black]: '♕' },
+    King: { [Color.White]: '♚', [Color.Black]: '♔' },
+    PieceMock: { [Color.White]: '◉', [Color.Black]: '☉' },
   }
 
   const name = piece.constructor.name
-  const colorKey = piece.color === 'black' ? 'black' : 'white'
+  const colorKey = piece.color === Color.Black ? Color.Black : Color.White
   return symbols[name]?.[colorKey] ?? '?'
 }
 

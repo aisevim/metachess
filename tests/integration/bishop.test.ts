@@ -9,6 +9,7 @@ import { Board } from '@/board/Board'
 import { Position } from '@/board/Position'
 import { RulesEngine } from '@/game/RulesEngine'
 import { Bishop } from '@/pieces/types/Bishop'
+import { Color } from '@/types/enums/color'
 
 describe('bishop legal moves (• moves, x capture)', () => {
   it('moves along diagonals with captures, respecting board edges', ({ expect }) => {
@@ -16,8 +17,8 @@ describe('bishop legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Bishop, 'white', ['d4', 'b6'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['f2', 'b2', 'a7', 'a1'])
+    setPiecesAtPositions(board, Bishop, Color.White, ['d4', 'b6'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['f2', 'b2', 'a7', 'a1'])
 
     attackMap.recomputeAll()
 

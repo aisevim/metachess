@@ -4,13 +4,14 @@ import { CastleMoveExecutor } from '@/moves/execution/CastleMoveExecutor'
 import { NormalMoveGenerator } from '@/moves/generators/NormalMoveGenerator'
 import { MoveCommand } from '@/moves/MoveCommand'
 import { PieceType } from '@/pieces/enums/PieceType'
+import { Color } from '@/types/enums/color'
 
 export class KingMoveGenerator extends NormalMoveGenerator {
   getLegalMoves(piece: Piece): MoveCommand[] {
     const moves = super.getLegalMoves(piece)
 
     const row = piece.position.y
-    const enemyColor = piece.color === 'white' ? 'black' : 'white'
+    const enemyColor = piece.color === Color.White ? Color.Black : Color.White
 
     const castlePositionsConfig = [
       { rookX: 7, kingTargetX: 6, rookTargetX: 5, emptyXs: [5, 6] },

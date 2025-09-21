@@ -1,6 +1,6 @@
 import type { MovementType } from '@/moves/enums/MovementType'
 import type { PieceType } from '@/pieces/enums/PieceType'
-import type { Color } from '@/types/color'
+import type { Color } from '@/types/enums/color'
 import type { PieceMemento } from '@/types/piece'
 import { Position } from '@/board/Position'
 

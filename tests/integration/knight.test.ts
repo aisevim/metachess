@@ -9,6 +9,7 @@ import { Board } from '@/board/Board'
 import { Position } from '@/board/Position'
 import { RulesEngine } from '@/game/RulesEngine'
 import { Knight } from '@/pieces/types/Knight'
+import { Color } from '@/types/enums/color'
 
 describe('knight legal moves (• moves, x capture)', () => {
   it('shows 7 legal moves (L-shaped) from d4 (1 blocked, 2 captures, 5 free)', ({ expect }) => {
@@ -16,8 +17,8 @@ describe('knight legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Knight, 'white', ['d4', 'c6'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['b3', 'f5'])
+    setPiecesAtPositions(board, Knight, Color.White, ['d4', 'c6'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['b3', 'f5'])
 
     attackMap.recomputeAll()
 
@@ -45,7 +46,7 @@ describe('knight legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Knight, 'white', ['a1'])
+    setPiecesAtPositions(board, Knight, Color.White, ['a1'])
 
     attackMap.recomputeAll()
 

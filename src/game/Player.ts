@@ -1,6 +1,6 @@
-import type { Color } from '@/types/color'
+import { Color } from '@/types/enums/color'
 
 export class Player {
   public name: string = 'Player'
-  public color: Color = 'white'
+  public color: Color = Color.White
 }

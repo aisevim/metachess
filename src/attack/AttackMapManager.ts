@@ -4,7 +4,7 @@ import type { IBoard } from '@/board/IBoard'
 import type { Position } from '@/board/Position'
 import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/color'
+import type { Color } from '@/types/enums/color'
 
 export class AttackMapManager {
   private maps: Map<Piece, AttackMap> = new Map()

@@ -11,6 +11,7 @@ import { RulesEngine } from '@/game/RulesEngine'
 import { NormalMoveExecutor } from '@/moves/execution/NormalMoveExecutor'
 import { MoveCommand } from '@/moves/MoveCommand'
 import { Pawn } from '@/pieces/types/Pawn'
+import { Color } from '@/types/enums/color'
 
 describe('pawn legal moves (• moves, x capture)', () => {
   it('moves 1 square forward if already moved, diagonals for capture', ({ expect }) => {
@@ -18,8 +19,8 @@ describe('pawn legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Pawn, 'white', ['c2', 'd2'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'e1'])
+    setPiecesAtPositions(board, Pawn, Color.White, ['c2', 'd2'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['c3', 'e1'])
 
     attackMap.recomputeAll()
 
@@ -48,8 +49,8 @@ describe('pawn legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Pawn, 'white', ['c2', 'd2'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'e3', 'e1'])
+    setPiecesAtPositions(board, Pawn, Color.White, ['c2', 'd2'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['c3', 'e3', 'e1'])
 
     attackMap.recomputeAll()
 
@@ -74,7 +75,7 @@ describe('pawn legal moves (• moves, x capture)', () => {
 
   it('handles en passant correctly', ({ expect }) => {
     const history = [new MoveCommand(
-      new Pawn('white', new Position('d4')),
+      new Pawn(Color.White, new Position('d4')),
       new Position('d2'),
       new Position('d4'),
       new NormalMoveExecutor(),
@@ -83,8 +84,8 @@ describe('pawn legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap, history)
 
-    setPiecesAtPositions(board, Pawn, 'white', ['c2', 'd4', 'f3'])
-    setPiecesAtPositions(board, Pawn, 'black', ['e4'])
+    setPiecesAtPositions(board, Pawn, Color.White, ['c2', 'd4', 'f3'])
+    setPiecesAtPositions(board, Pawn, Color.Black, ['e4'])
 
     const selected = board.getPieceAt(new Position('e4')) as Piece
     selected.hasMoved = true

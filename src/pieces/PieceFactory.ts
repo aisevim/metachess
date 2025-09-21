@@ -1,5 +1,5 @@
 import type { Position } from '@/board/Position'
-import type { Color } from '@/types/color'
+import type { Color } from '@/types/enums/color'
 import { PieceType } from '@/pieces/enums/PieceType'
 import { Bishop } from '@/pieces/types/Bishop'
 import { King } from '@/pieces/types/King'

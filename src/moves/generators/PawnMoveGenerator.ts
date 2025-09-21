@@ -8,6 +8,7 @@ import { NormalMoveExecutor } from '@/moves/execution/NormalMoveExecutor'
 import { PromotionMoveExecutor } from '@/moves/execution/PromotionMoveExecutor'
 import { MoveCommand } from '@/moves/MoveCommand'
 import { PieceType } from '@/pieces/enums/PieceType'
+import { Color } from '@/types/enums/color'
 
 export class PawnMoveGenerator implements MoveGenerator {
   constructor(private board: IBoard, private attackMapManager: AttackMapManager, private history: MoveCommand[] = []) {}
@@ -16,8 +17,8 @@ export class PawnMoveGenerator implements MoveGenerator {
     const moves: MoveCommand[] = []
     const { x, y } = piece.position
 
-    const direction = piece.color === 'white' ? 1 : -1
-    const promotionRank = piece.color === 'white' ? this.board.size - 1 : 0
+    const direction = piece.color === Color.White ? 1 : -1
+    const promotionRank = piece.color === Color.White ? this.board.size - 1 : 0
     const strategy = (p: Position) => p.y === promotionRank ? new PromotionMoveExecutor() : new NormalMoveExecutor()
 
     // --- Avance simple ---

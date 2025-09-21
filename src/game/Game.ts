@@ -3,11 +3,11 @@ import type { IBoard } from '@/board/IBoard'
 import type { Position } from '@/board/Position'
 import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Grid } from '@/types/board'
-import type { Color } from '@/types/color'
 import { RulesEngine } from '@/game/RulesEngine'
 import { PromotionMoveExecutor } from '@/moves/execution/PromotionMoveExecutor'
 import { PieceType } from '@/pieces/enums/PieceType'
 import { PieceFactory } from '@/pieces/PieceFactory'
+import { Color } from '@/types/enums/color'
 
 export class Game {
   private rulesEngine: RulesEngine
@@ -16,11 +16,11 @@ export class Game {
 
   constructor(private board: IBoard, private attackMapManager: AttackMapManager) {
     this.rulesEngine = new RulesEngine(this.board, this.attackMapManager, this.history)
-    this.currentTurn = 'white'
+    this.currentTurn = Color.White
   }
 
   switchTurn() {
-    this.currentTurn = this.currentTurn === 'white' ? 'black' : 'white'
+    this.currentTurn = this.currentTurn === Color.White ? Color.Black : Color.White
   }
 
   executeMove(from: Position, to: Position) {

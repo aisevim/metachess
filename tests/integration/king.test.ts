@@ -10,6 +10,7 @@ import { Position } from '@/board/Position'
 import { RulesEngine } from '@/game/RulesEngine'
 import { King } from '@/pieces/types/King'
 import { Rook } from '@/pieces/types/Rook'
+import { Color } from '@/types/enums/color'
 
 describe('king legal moves (• moves, x capture)', () => {
   it('one-square in any direction, with captures and blocked by allies', ({ expect }) => {
@@ -17,9 +18,9 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['d4'])
-    setPiecesAtPositions(board, PieceMock, 'white', ['c5'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'd3'])
+    setPiecesAtPositions(board, King, Color.White, ['d4'])
+    setPiecesAtPositions(board, PieceMock, Color.White, ['c5'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['c3', 'd3'])
 
     attackMap.recomputeAll()
 
@@ -47,7 +48,7 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['a1'])
+    setPiecesAtPositions(board, King, Color.White, ['a1'])
 
     attackMap.recomputeAll()
 
@@ -75,8 +76,8 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['e1'])
-    setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
+    setPiecesAtPositions(board, King, Color.White, ['e1'])
+    setPiecesAtPositions(board, Rook, Color.White, ['a1', 'h1'])
 
     attackMap.recomputeAll()
 
@@ -103,10 +104,10 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['e1'])
-    setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
-    setPiecesAtPositions(board, PieceMock, 'white', ['g1'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['b1'])
+    setPiecesAtPositions(board, King, Color.White, ['e1'])
+    setPiecesAtPositions(board, Rook, Color.White, ['a1', 'h1'])
+    setPiecesAtPositions(board, PieceMock, Color.White, ['g1'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['b1'])
 
     attackMap.recomputeAll()
 
@@ -133,9 +134,9 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['e1'])
-    setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['c2', 'g2'])
+    setPiecesAtPositions(board, King, Color.White, ['e1'])
+    setPiecesAtPositions(board, Rook, Color.White, ['a1', 'h1'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['c2', 'g2'])
 
     attackMap.recomputeAll()
 
@@ -162,9 +163,9 @@ describe('king legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, King, 'white', ['e1'])
-    setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
-    setPiecesAtPositions(board, Rook, 'black', ['e2'])
+    setPiecesAtPositions(board, King, Color.White, ['e1'])
+    setPiecesAtPositions(board, Rook, Color.White, ['a1', 'h1'])
+    setPiecesAtPositions(board, Rook, Color.Black, ['e2'])
 
     attackMap.recomputeAll()
 

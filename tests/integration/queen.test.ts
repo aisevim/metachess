@@ -9,6 +9,7 @@ import { Board } from '@/board/Board'
 import { Position } from '@/board/Position'
 import { RulesEngine } from '@/game/RulesEngine'
 import { Queen } from '@/pieces/types/Queen'
+import { Color } from '@/types/enums/color'
 
 describe('queen legal moves (• moves, x capture)', () => {
   it('moves along ranks and files with captures, blocked by allies, and respects board edges', ({ expect }) => {
@@ -16,9 +17,9 @@ describe('queen legal moves (• moves, x capture)', () => {
     const attackMap = new AttackMapManager(board, new AttackMapFactory())
     const rules = new RulesEngine(board, attackMap)
 
-    setPiecesAtPositions(board, Queen, 'white', ['d4'])
-    setPiecesAtPositions(board, PieceMock, 'white', ['d5'])
-    setPiecesAtPositions(board, PieceMock, 'black', ['d7', 'a4', 'f6', 'g7'])
+    setPiecesAtPositions(board, Queen, Color.White, ['d4'])
+    setPiecesAtPositions(board, PieceMock, Color.White, ['d5'])
+    setPiecesAtPositions(board, PieceMock, Color.Black, ['d7', 'a4', 'f6', 'g7'])
 
     attackMap.recomputeAll()
 
