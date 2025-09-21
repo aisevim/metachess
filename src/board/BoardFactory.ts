@@ -1,12 +1,12 @@
-import type { IBoard } from '@/types/interfaces/IBoard'
-import { Board } from '@/core/Board'
-import { Position } from '@/core/Position'
-import { Bishop } from '@/pieces/Bishop'
-import { King } from '@/pieces/King'
-import { Knight } from '@/pieces/Knight'
-import { Pawn } from '@/pieces/Pawn'
-import { Queen } from '@/pieces/Queen'
-import { Rook } from '@/pieces/Rook'
+import type { IBoard } from '@/board/IBoard'
+import { Board } from '@/board/Board'
+import { Position } from '@/board/Position'
+import { Bishop } from '@/pieces/types/Bishop'
+import { King } from '@/pieces/types/King'
+import { Knight } from '@/pieces/types/Knight'
+import { Pawn } from '@/pieces/types/Pawn'
+import { Queen } from '@/pieces/types/Queen'
+import { Rook } from '@/pieces/types/Rook'
 
 export class BoardFactory {
   public static empty(): IBoard {

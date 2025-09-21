@@ -1,14 +1,4 @@
-import type { MoveCommand } from '@/core/MoveCommand'
-import type { Position } from '@/core/Position'
-
-export type pieceType = 'pawn' | 'king' | 'queen' | 'rook' | 'bishop' | 'knight'
-
-export type promotionType = 'queen' | 'rook' | 'bishop' | 'knight'
-
-export interface LegalMoveContext {
-  history?: MoveCommand[]
-  onCastling?: boolean
-}
+import type { Position } from '@/board/Position'
 
 export interface PieceMemento {
   position: Position

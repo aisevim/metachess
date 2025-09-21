@@ -1,8 +1,7 @@
-import type { Position } from '@/core/Position'
+import type { IBoard } from '@/board/IBoard'
+import type { Position } from '@/board/Position'
 import type { Piece } from '@/pieces/Piece'
 import type { Grid } from '@/types/board'
-import type { Color } from '@/types/color'
-import type { IBoard } from '@/types/interfaces/IBoard'
 
 export class Board implements IBoard {
   public readonly size = 8
@@ -28,6 +27,10 @@ export class Board implements IBoard {
     this.grid[pos.y][pos.x] = null
   }
 
+  getAllPieces(): Piece[] {
+    return this.grid.flat().filter((p): p is Piece => p !== null)
+  }
+
   toSnapshot(): Grid {
     return this.grid.map(row => [...row])
   }
@@ -39,23 +42,5 @@ export class Board implements IBoard {
       && pos.x < this.size
       && pos.y < this.size
     )
-  }
-
-  isSquareAttackedByEnemy(pos: Position, byColor: Color): boolean {
-    for (let y = 0; y < this.size; y++) {
-      for (let x = 0; x < this.size; x++) {
-        const piece = this.grid[y][x]
-
-        if (piece && piece.color === byColor) {
-          const moves = piece.getLegalMoves(this, { onCastling: true })
-
-          if (moves.some(m => m.to.equals(pos))) {
-            return true
-          }
-        }
-      }
-    }
-
-    return false
   }
 }

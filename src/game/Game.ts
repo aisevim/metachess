@@ -1,17 +1,21 @@
-import type { MoveCommand } from './MoveCommand'
-import type { Position } from '@/core/Position'
+import type { AttackMapManager } from '@/attack/AttackMapManager'
+import type { IBoard } from '@/board/IBoard'
+import type { Position } from '@/board/Position'
+import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Grid } from '@/types/board'
 import type { Color } from '@/types/color'
-import type { IBoard } from '@/types/interfaces/IBoard'
-import { PieceFactory } from '@/core/PieceFactory'
+import { RulesEngine } from '@/game/RulesEngine'
+import { PromotionMoveExecutor } from '@/moves/execution/PromotionMoveExecutor'
+import { PieceType } from '@/pieces/enums/PieceType'
+import { PieceFactory } from '@/pieces/PieceFactory'
 
 export class Game {
-  private board: IBoard
+  private rulesEngine: RulesEngine
   private currentTurn: Color
   private history: MoveCommand[] = []
 
-  constructor(board: IBoard) {
-    this.board = board
+  constructor(private board: IBoard, private attackMapManager: AttackMapManager) {
+    this.rulesEngine = new RulesEngine(this.board, this.attackMapManager, this.history)
     this.currentTurn = 'white'
   }
 
@@ -26,7 +30,7 @@ export class Game {
     if (piece.color !== this.currentTurn)
       throw new Error('Not your turn')
 
-    const legalMoves = piece.getLegalMoves(this.board, { history: this.history })
+    const legalMoves = this.rulesEngine.getLegalMoves(piece)
     const move = legalMoves.find(m => m.to.equals(to))
 
     if (!move)
@@ -35,11 +39,22 @@ export class Game {
     this.handleSpecialMove(move)
     move.execute(this.board)
     this.history.push(move)
+    this.attackMapManager.recomputeAll()
+    this.switchTurn()
+  }
+
+  undoMove() {
+    const lastMove = this.history.pop()
+    if (!lastMove)
+      throw new Error('No moves to undo')
+
+    lastMove.undo(this.board)
+    this.attackMapManager.recomputeAll()
     this.switchTurn()
   }
 
   private handleSpecialMove(move: MoveCommand) {
-    if (move.type === 'promotion') {
+    if (move.strategy instanceof PromotionMoveExecutor) {
       this.handlePromotion(move)
     }
   }
@@ -48,7 +63,7 @@ export class Game {
     if (!move.options)
       return
     // Ask the type of promotion
-    const piece = PieceFactory.createPromotionPiece('queen', move.piece.color, move.piece.position)
+    const piece = PieceFactory.createPromotionPiece(PieceType.Queen, move.piece.color, move.piece.position)
     move.options.promotionPiece = piece
   }
 

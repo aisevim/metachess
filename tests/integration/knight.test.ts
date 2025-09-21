@@ -1,18 +1,28 @@
+import type { Piece } from '@/pieces/Piece'
 import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
-import { Board } from '@/core/Board'
-import { Position } from '@/core/Position'
-import { Knight } from '@/pieces/Knight'
+import { AttackMapFactory } from '@/attack/AttackMapFactory'
+import { AttackMapManager } from '@/attack/AttackMapManager'
+import { Board } from '@/board/Board'
+import { Position } from '@/board/Position'
+import { RulesEngine } from '@/game/RulesEngine'
+import { Knight } from '@/pieces/types/Knight'
 
 describe('knight legal moves (• moves, x capture)', () => {
   it('shows 7 legal moves (L-shaped) from d4 (1 blocked, 2 captures, 5 free)', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, Knight, 'white', ['d4', 'c6'])
     setPiecesAtPositions(board, PieceMock, 'black', ['b3', 'f5'])
-    const selected = board.getPieceAt(new Position('d4'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('d4')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "
@@ -32,9 +42,15 @@ describe('knight legal moves (• moves, x capture)', () => {
 
   it('shows 2 legal moves from the corner a1', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, Knight, 'white', ['a1'])
-    const selected = board.getPieceAt(new Position('a1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('a1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "

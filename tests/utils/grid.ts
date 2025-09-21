@@ -1,7 +1,7 @@
 import type { Piece } from '@/pieces/Piece'
 import type { Color } from '@/types/color'
 import type { ChessPosition } from '@/types/position'
-import { Position } from '@/core/Position'
+import { Position } from '@/board/Position'
 
 export function createGridWithPieces(
   PieceClass: new (color: Color, position: Position) => Piece,

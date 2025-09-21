@@ -1,11 +1,18 @@
-import type { MoveCommand } from '@/core/MoveCommand'
-import type { Position } from '@/core/Position'
+import type { MovementType } from '@/moves/enums/MovementType'
+import type { PieceType } from '@/pieces/enums/PieceType'
 import type { Color } from '@/types/color'
-import type { IBoard } from '@/types/interfaces/IBoard'
-import type { LegalMoveContext, PieceMemento } from '@/types/piece'
+import type { PieceMemento } from '@/types/piece'
+import { Position } from '@/board/Position'
+
+interface PieceOffsets {
+  dx: number
+  dy: number
+}
 
 export abstract class Piece {
-  abstract type: string
+  abstract type: PieceType
+  abstract movementType: MovementType
+  abstract offsets: PieceOffsets[]
 
   constructor(
     public color: Color,
@@ -13,11 +20,15 @@ export abstract class Piece {
     public hasMoved: boolean = false,
   ) {}
 
-  public abstract getLegalMoves(board: IBoard, context?: LegalMoveContext): MoveCommand[]
-
   public moveTo(position: Position) {
     this.position = position
     this.hasMoved = true
+  }
+
+  public offsetsToPositions(): Position[] {
+    return this.offsets.map(offset =>
+      new Position(this.position.x + offset.dx, this.position.y + offset.dy),
+    )
   }
 
   public createMemento(): PieceMemento {

@@ -1,4 +1,4 @@
-import type { MoveCommand } from '@/core/MoveCommand'
+import type { MoveCommand } from '@/moves/MoveCommand'
 import type { Piece } from '@/pieces/Piece'
 
 function pieceSymbol(piece: Piece): string {

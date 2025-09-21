@@ -1,19 +1,29 @@
+import type { Piece } from '@/pieces/Piece'
 import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
-import { Board } from '@/core/Board'
-import { Position } from '@/core/Position'
-import { Queen } from '@/pieces/Queen'
+import { AttackMapFactory } from '@/attack/AttackMapFactory'
+import { AttackMapManager } from '@/attack/AttackMapManager'
+import { Board } from '@/board/Board'
+import { Position } from '@/board/Position'
+import { RulesEngine } from '@/game/RulesEngine'
+import { Queen } from '@/pieces/types/Queen'
 
 describe('queen legal moves (• moves, x capture)', () => {
   it('moves along ranks and files with captures, blocked by allies, and respects board edges', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, Queen, 'white', ['d4'])
     setPiecesAtPositions(board, PieceMock, 'white', ['d5'])
     setPiecesAtPositions(board, PieceMock, 'black', ['d7', 'a4', 'f6', 'g7'])
-    const selected = board.getPieceAt(new Position('d4'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('d4')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "

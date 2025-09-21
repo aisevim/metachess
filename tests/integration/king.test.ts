@@ -1,20 +1,30 @@
+import type { Piece } from '@/pieces/Piece'
 import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
-import { Board } from '@/core/Board'
-import { Position } from '@/core/Position'
-import { King } from '@/pieces/King'
-import { Rook } from '@/pieces/Rook'
+import { AttackMapFactory } from '@/attack/AttackMapFactory'
+import { AttackMapManager } from '@/attack/AttackMapManager'
+import { Board } from '@/board/Board'
+import { Position } from '@/board/Position'
+import { RulesEngine } from '@/game/RulesEngine'
+import { King } from '@/pieces/types/King'
+import { Rook } from '@/pieces/types/Rook'
 
 describe('king legal moves (• moves, x capture)', () => {
   it('one-square in any direction, with captures and blocked by allies', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['d4'])
     setPiecesAtPositions(board, PieceMock, 'white', ['c5'])
     setPiecesAtPositions(board, PieceMock, 'black', ['c3', 'd3'])
-    const selected = board.getPieceAt(new Position('d4'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('d4')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "
@@ -34,9 +44,15 @@ describe('king legal moves (• moves, x capture)', () => {
 
   it('should only allow 3 moves when in the corner', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['a1'])
-    const selected = board.getPieceAt(new Position('a1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('a1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "
@@ -56,10 +72,16 @@ describe('king legal moves (• moves, x capture)', () => {
 
   it('should allow castling when path is clear and king is safe', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['e1'])
     setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
-    const selected = board.getPieceAt(new Position('e1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('e1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
         "
@@ -78,12 +100,18 @@ describe('king legal moves (• moves, x capture)', () => {
 
   it('should not allow castling when allied or enemies pieces block the path', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['e1'])
     setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
     setPiecesAtPositions(board, PieceMock, 'white', ['g1'])
     setPiecesAtPositions(board, PieceMock, 'black', ['b1'])
-    const selected = board.getPieceAt(new Position('e1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('e1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "
@@ -102,11 +130,17 @@ describe('king legal moves (• moves, x capture)', () => {
 
   it('should not allow castling if a square in the path is under attack', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['e1'])
     setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
     setPiecesAtPositions(board, PieceMock, 'black', ['c2', 'g2'])
-    const selected = board.getPieceAt(new Position('e1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('e1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "
@@ -125,11 +159,17 @@ describe('king legal moves (• moves, x capture)', () => {
 
   it('should not allow castling while in check', ({ expect }) => {
     const board = new Board()
+    const attackMap = new AttackMapManager(board, new AttackMapFactory())
+    const rules = new RulesEngine(board, attackMap)
+
     setPiecesAtPositions(board, King, 'white', ['e1'])
     setPiecesAtPositions(board, Rook, 'white', ['a1', 'h1'])
     setPiecesAtPositions(board, Rook, 'black', ['e2'])
-    const selected = board.getPieceAt(new Position('e1'))
-    const moves = selected?.getLegalMoves(board)
+
+    attackMap.recomputeAll()
+
+    const selected = board.getPieceAt(new Position('e1')) as Piece
+    const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
       "

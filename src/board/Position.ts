@@ -26,6 +26,11 @@ export class Position {
     return this.x === other.x && this.y === other.y
   }
 
+  toChessPosition(): ChessPosition {
+    const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    return `${files[this.x]}${this.y + 1}` as ChessPosition
+  }
+
   static fromAlgebraic(pos: ChessPosition): { x: number, y: number } {
     const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 
