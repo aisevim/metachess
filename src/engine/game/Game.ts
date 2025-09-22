@@ -2,6 +2,7 @@ import type { AttackMapManager } from '@/engine/attack/AttackMapManager'
 import type { IBoard } from '@/engine/board/IBoard'
 import type { Position } from '@/engine/board/Position'
 import type { MoveCommand } from '@/engine/moves/MoveCommand'
+import type { PieceType } from '@/engine/pieces/enums/PieceType'
 import type { Grid } from '@/engine/types/board'
 import { RulesEngine } from '@/engine/game/RulesEngine'
 import { PromotionMoveExecutor } from '@/engine/moves/execution/PromotionMoveExecutor'
@@ -22,7 +23,7 @@ export class Game {
     this.currentTurn = this.currentTurn === Color.White ? Color.Black : Color.White
   }
 
-  executeMove(from: Position, to: Position) {
+  executeMove(from: Position, to: Position, promotion?: PieceType) {
     const piece = this.board.getPieceAt(from)
     if (!piece)
       throw new Error('No piece at the source position')
@@ -35,19 +36,19 @@ export class Game {
     if (matchingMoves.length === 0)
       throw new Error('Illegal move')
 
-    const move = this.choosePromotionMoveIfNeeded(matchingMoves)
+    const move = this.choosePromotionMoveIfNeeded(matchingMoves, promotion)
     move.execute(this.board)
     this.history.push(move)
     this.attackMapManager.recomputeAll()
     this.switchTurn()
   }
 
-  private choosePromotionMoveIfNeeded(moves: MoveCommand[]): MoveCommand {
+  private choosePromotionMoveIfNeeded(moves: MoveCommand[], promotion?: PieceType): MoveCommand {
     if (moves.length === 1)
       return moves[0]
 
     const promotionMove = moves.find(
-      m => m.executor instanceof PromotionMoveExecutor && m.options?.promotionPiece?.type === PieceType.Queen,
+      m => m.executor instanceof PromotionMoveExecutor && m.options?.promotionPiece?.type === promotion,
     )
     if (!promotionMove)
       throw new Error('No valid promotion move found')

@@ -1,6 +1,7 @@
 import { createGame, executeMoves, renderGrid } from 'tests/utils'
 import { describe, it } from 'vitest'
 import { Position } from '@/engine/board/Position'
+import { PieceType } from '@/engine/pieces/enums/PieceType'
 
 describe('integration', () => {
   it('should initialize game with Pieces at good position', ({ expect }) => {
@@ -212,7 +213,7 @@ describe('integration', () => {
         `)
 
         // promotion
-        executeMoves(game, [['c7', 'b8']])
+        executeMoves(game, [['c7', 'b8', PieceType.Queen]])
         expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
           "
           8  ♖ ♛ ♗ ♕ ♔ ♗ ♘ ♖ 

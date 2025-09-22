@@ -1,3 +1,4 @@
+import type { PieceType } from '@/engine/pieces/enums/PieceType'
 import type { ChessPosition } from '@/engine/types/position'
 import { AttackMapFactory } from '@/engine/attack/AttackMapFactory'
 import { AttackMapManager } from '@/engine/attack/AttackMapManager'
@@ -14,6 +15,6 @@ export function createGame() {
   return game
 }
 
-export function executeMoves(game: Game, moves: [ChessPosition, ChessPosition][]) {
-  moves.forEach(([from, to]) => game.executeMove(new Position(from), new Position(to)))
+export function executeMoves(game: Game, moves: [ChessPosition, ChessPosition, PieceType?][]) {
+  moves.forEach(([from, to, type]) => game.executeMove(new Position(from), new Position(to), type))
 }
