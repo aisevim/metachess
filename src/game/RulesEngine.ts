@@ -31,19 +31,17 @@ export class RulesEngine {
     return this.attackMapManager.isSquareAttacked(king.position, enemyColor)
   }
 
-  isCheckmate(color: Color): boolean {
-    if (!this.isKingInCheck(color))
-      return false
+  private hasLegalMoves(color: Color): boolean {
+    return this.board.getAllPieces()
+      .filter(p => p.color === color)
+      .some(piece => this.getLegalMoves(piece).length > 0)
+  }
 
-    const pieces = this.board.getAllPieces().filter(p => p.color === color)
-    return !pieces.some(piece => this.getLegalMoves(piece).length > 0)
+  isCheckmate(color: Color): boolean {
+    return this.isKingInCheck(color) && !this.hasLegalMoves(color)
   }
 
   isStalemate(color: Color): boolean {
-    if (this.isKingInCheck(color))
-      return false
-
-    const pieces = this.board.getAllPieces().filter(p => p.color === color)
-    return !pieces.some(piece => this.getLegalMoves(piece).length > 0)
+    return !this.isKingInCheck(color) && !this.hasLegalMoves(color)
   }
 }
