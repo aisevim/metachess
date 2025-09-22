@@ -6,7 +6,6 @@ import type { PieceType } from '@/engine/pieces/enums/PieceType'
 import type { Grid } from '@/engine/types/board'
 import { RulesEngine } from '@/engine/game/RulesEngine'
 import { PromotionMoveExecutor } from '@/engine/moves/execution/PromotionMoveExecutor'
-import { PieceType } from '@/engine/pieces/enums/PieceType'
 import { Color } from '@/engine/types/enums/color'
 
 export class Game {
@@ -65,8 +64,32 @@ export class Game {
     this.switchTurn()
   }
 
-  // à revoir
-  public getBoardSnapshot(): Grid {
+  isCheck(color: Color) {
+    return this.rulesEngine.isKingInCheck(color)
+  }
+
+  isCheckmate(color: Color) {
+    return this.rulesEngine.isCheckmate(color)
+  }
+
+  isStalemate(color: Color) {
+    return this.rulesEngine.isStalemate(color)
+  }
+
+  getCurrentTurn() {
+    return this.currentTurn
+  }
+
+  getLegalMovesAt(position: Position) {
+    const piece = this.board.getPieceAt(position)
+
+    if (!piece) {
+      throw new Error('No piece at this position')
+    }
+    return this.rulesEngine.getLegalMoves(piece)
+  }
+
+  getBoardSnapshot(): Grid {
     return this.board.toSnapshot().map(row => [...row])
   }
 }
