@@ -6,7 +6,6 @@ import type { Grid } from '@/types/board'
 import { RulesEngine } from '@/game/RulesEngine'
 import { PromotionMoveExecutor } from '@/moves/execution/PromotionMoveExecutor'
 import { PieceType } from '@/pieces/enums/PieceType'
-import { PieceFactory } from '@/pieces/PieceFactory'
 import { Color } from '@/types/enums/color'
 
 export class Game {
@@ -31,16 +30,28 @@ export class Game {
       throw new Error('Not your turn')
 
     const legalMoves = this.rulesEngine.getLegalMoves(piece)
-    const move = legalMoves.find(m => m.to.equals(to))
+    const matchingMoves = legalMoves.filter(m => m.to.equals(to))
 
-    if (!move)
+    if (matchingMoves.length === 0)
       throw new Error('Illegal move')
 
-    this.handleSpecialMove(move)
+    const move = this.choosePromotionMoveIfNeeded(matchingMoves)
     move.execute(this.board)
     this.history.push(move)
     this.attackMapManager.recomputeAll()
     this.switchTurn()
+  }
+
+  private choosePromotionMoveIfNeeded(moves: MoveCommand[]): MoveCommand {
+    if (moves.length === 1)
+      return moves[0]
+
+    const promotionMove = moves.find(
+      m => m.executor instanceof PromotionMoveExecutor && m.options?.promotionPiece?.type === PieceType.Queen,
+    )
+    if (!promotionMove)
+      throw new Error('No valid promotion move found')
+    return promotionMove
   }
 
   undoMove() {
@@ -51,20 +62,6 @@ export class Game {
     lastMove.undo(this.board)
     this.attackMapManager.recomputeAll()
     this.switchTurn()
-  }
-
-  private handleSpecialMove(move: MoveCommand) {
-    if (move.executor instanceof PromotionMoveExecutor) {
-      this.handlePromotion(move)
-    }
-  }
-
-  private handlePromotion(move: MoveCommand) {
-    if (!move.options)
-      return
-    // Ask the type of promotion
-    const piece = PieceFactory.createPromotionPiece(PieceType.Queen, move.piece.color, move.piece.position)
-    move.options.promotionPiece = piece
   }
 
   // à revoir

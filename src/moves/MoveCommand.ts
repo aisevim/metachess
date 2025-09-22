@@ -21,7 +21,7 @@ export class MoveCommand {
     public piece: Piece,
     public from: Position,
     public to: Position,
-    private executor: MoveExecutor,
+    public executor: MoveExecutor,
     public options?: MoveOptions,
   ) {
     this.pieceMemento = piece.createMemento()

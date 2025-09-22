@@ -8,8 +8,6 @@ import { Pawn } from '@/pieces/types/Pawn'
 import { Queen } from '@/pieces/types/Queen'
 import { Rook } from '@/pieces/types/Rook'
 
-type PromotionType = PieceType.Bishop | PieceType.Knight | PieceType.Queen | PieceType.Rook
-
 export class PieceFactory {
   static create(type: PieceType, color: Color, position: Position) {
     switch (type) {
@@ -20,16 +18,6 @@ export class PieceFactory {
       case PieceType.Knight: return new Knight(color, position)
       case PieceType.King: return new King(color, position)
       default: throw new Error('Unknown piece type')
-    }
-  }
-
-  static createPromotionPiece(type: PromotionType, color: Color, pos: Position) {
-    switch (type) {
-      case PieceType.Queen:
-      case PieceType.Rook:
-      case PieceType.Knight:
-      case PieceType.Bishop:
-        return PieceFactory.create(type, color, pos)
     }
   }
 }
