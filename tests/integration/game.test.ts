@@ -1,6 +1,6 @@
 import { createGame, executeMoves, renderGrid } from 'tests/utils'
 import { describe, it } from 'vitest'
-import { Position } from '@/board/Position'
+import { Position } from '@/engine/board/Position'
 
 describe('integration', () => {
   it('should initialize game with Pieces at good position', ({ expect }) => {

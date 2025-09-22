@@ -1,6 +1,6 @@
-import type { PieceType } from '@/pieces/enums/PieceType'
-import { MovementType } from '@/moves/enums/MovementType'
-import { Piece } from '@/pieces/Piece'
+import type { PieceType } from '@/engine/pieces/enums/PieceType'
+import { MovementType } from '@/engine/moves/enums/MovementType'
+import { Piece } from '@/engine/pieces/Piece'
 
 export class PieceMock extends Piece {
   readonly type = 'piece-mock' as unknown as PieceType

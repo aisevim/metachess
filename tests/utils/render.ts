@@ -1,6 +1,6 @@
-import type { MoveCommand } from '@/moves/MoveCommand'
-import type { Piece } from '@/pieces/Piece'
-import { Color } from '@/types/enums/color'
+import type { MoveCommand } from '@/engine/moves/MoveCommand'
+import type { Piece } from '@/engine/pieces/Piece'
+import { Color } from '@/engine/types/enums/color'
 
 function pieceSymbol(piece: Piece): string {
   const symbols: Record<string, Record<Color, string>> = {

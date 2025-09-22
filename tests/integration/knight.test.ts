@@ -1,15 +1,15 @@
-import type { Piece } from '@/pieces/Piece'
+import type { Piece } from '@/engine/pieces/Piece'
 import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
-import { AttackMapFactory } from '@/attack/AttackMapFactory'
-import { AttackMapManager } from '@/attack/AttackMapManager'
-import { Board } from '@/board/Board'
-import { Position } from '@/board/Position'
-import { RulesEngine } from '@/game/RulesEngine'
-import { Knight } from '@/pieces/types/Knight'
-import { Color } from '@/types/enums/color'
+import { AttackMapFactory } from '@/engine/attack/AttackMapFactory'
+import { AttackMapManager } from '@/engine/attack/AttackMapManager'
+import { Board } from '@/engine/board/Board'
+import { Position } from '@/engine/board/Position'
+import { RulesEngine } from '@/engine/game/RulesEngine'
+import { Knight } from '@/engine/pieces/types/Knight'
+import { Color } from '@/engine/types/enums/color'
 
 describe('knight legal moves (• moves, x capture)', () => {
   it('shows 7 legal moves (L-shaped) from d4 (1 blocked, 2 captures, 5 free)', ({ expect }) => {

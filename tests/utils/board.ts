@@ -1,8 +1,8 @@
-import type { Board } from '@/board/Board'
-import type { Piece } from '@/pieces/Piece'
-import type { Color } from '@/types/enums/color'
-import type { ChessPosition } from '@/types/position'
-import { Position } from '@/board/Position'
+import type { Board } from '@/engine/board/Board'
+import type { Piece } from '@/engine/pieces/Piece'
+import type { Color } from '@/engine/types/enums/color'
+import type { ChessPosition } from '@/engine/types/position'
+import { Position } from '@/engine/board/Position'
 
 export function setPiecesAtPositions(
   board: Board,

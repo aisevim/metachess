@@ -1,9 +1,9 @@
-import type { ChessPosition } from '@/types/position'
-import { AttackMapFactory } from '@/attack/AttackMapFactory'
-import { AttackMapManager } from '@/attack/AttackMapManager'
-import { BoardFactory } from '@/board/BoardFactory'
-import { Position } from '@/board/Position'
-import { Game } from '@/game/Game'
+import type { ChessPosition } from '@/engine/types/position'
+import { AttackMapFactory } from '@/engine/attack/AttackMapFactory'
+import { AttackMapManager } from '@/engine/attack/AttackMapManager'
+import { BoardFactory } from '@/engine/board/BoardFactory'
+import { Position } from '@/engine/board/Position'
+import { Game } from '@/engine/game/Game'
 
 export function createGame() {
   const board = BoardFactory.standard()

@@ -1,14 +1,14 @@
-import type { Piece } from '@/pieces/Piece'
+import type { Piece } from '@/engine/pieces/Piece'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
-import { AttackMapFactory } from '@/attack/AttackMapFactory'
-import { AttackMapManager } from '@/attack/AttackMapManager'
-import { Board } from '@/board/Board'
-import { Position } from '@/board/Position'
-import { RulesEngine } from '@/game/RulesEngine'
-import { Rook } from '@/pieces/types/Rook'
-import { Color } from '@/types/enums/color'
+import { AttackMapFactory } from '@/engine/attack/AttackMapFactory'
+import { AttackMapManager } from '@/engine/attack/AttackMapManager'
+import { Board } from '@/engine/board/Board'
+import { Position } from '@/engine/board/Position'
+import { RulesEngine } from '@/engine/game/RulesEngine'
+import { Rook } from '@/engine/pieces/types/Rook'
+import { Color } from '@/engine/types/enums/color'
 
 describe('rook legal moves (• moves, x capture)', () => {
   it('moves along ranks and files with captures, blocked by allies, and respects board edges', ({ expect }) => {
