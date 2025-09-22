@@ -385,20 +385,20 @@ describe('integration', () => {
         "
       `)
 
-      // game.executeMove(new Position('c3'), new Position('d5'))
-      // expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
-      //   "
-      //   8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖
-      //   7  ♙ ♙ ♙ - ♙ ♙ ♙ ♙
-      //   6  - - - - - - - -
-      //   5  - - - ♞ - - - -
-      //   4  - - - - - - - -
-      //   3  - - - - - - - -
-      //   2  ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟
-      //   1  ♜ - ♝ ♛ ♚ ♝ ♞ ♜
-      //      A B C D E F G H
-      //   "
-      // `)
+      game.executeMove(new Position('c3'), new Position('d5'))
+      expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
+        "
+        8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+        7  ♙ ♙ ♙ - ♙ ♙ ♙ ♙ 
+        6  - - - - - - - - 
+        5  - - - ♞ - - - - 
+        4  - - - - - - - - 
+        3  - - - - - - - - 
+        2  ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
+        1  ♜ - ♝ ♛ ♚ ♝ ♞ ♜ 
+           A B C D E F G H 
+        "
+      `)
     })
   })
 
