@@ -1,4 +1,3 @@
-import type { Piece } from '@/engine/pieces/Piece'
 import { PieceMock } from 'tests/mocks/PieceMock'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
@@ -24,7 +23,7 @@ describe('pawn legal moves (• moves, x capture)', () => {
 
     attackMap.recomputeAll()
 
-    const selected = board.getPieceAt(new Position('d2')) as Piece
+    const selected = board.getPieceAt(new Position('d2'))!
     selected.hasMoved = true
 
     const moves = rules.getLegalMoves(selected)
@@ -54,7 +53,7 @@ describe('pawn legal moves (• moves, x capture)', () => {
 
     attackMap.recomputeAll()
 
-    const selected = board.getPieceAt(new Position('d2')) as Piece
+    const selected = board.getPieceAt(new Position('d2'))!
     const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
@@ -87,7 +86,7 @@ describe('pawn legal moves (• moves, x capture)', () => {
     setPiecesAtPositions(board, Pawn, Color.White, ['c2', 'd4', 'f3'])
     setPiecesAtPositions(board, Pawn, Color.Black, ['e4'])
 
-    const selected = board.getPieceAt(new Position('e4')) as Piece
+    const selected = board.getPieceAt(new Position('e4'))!
     selected.hasMoved = true
 
     attackMap.recomputeAll()

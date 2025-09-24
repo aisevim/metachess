@@ -19,22 +19,18 @@ export class RulesEngine {
 
   getLegalMoves(piece: Piece): MoveCommand[] {
     const generator = this.moveGeneratorFactory.create(piece)
-    return generator.getLegalMoves(piece)
+    const moves = generator.getLegalMoves(piece)
+
+    return moves.filter(move => this.isMoveLegal(move, piece.color))
   }
 
   isKingInCheck(color: Color): boolean {
     const king = this.board.getAllPieces().find(p => p.color === color && p.type === PieceType.King)
     if (!king)
-      throw new Error(`No king found for color ${color}`)
+      return false
 
     const enemyColor = color === Color.White ? Color.Black : Color.White
     return this.attackMapManager.isSquareAttacked(king.position, enemyColor)
-  }
-
-  private hasLegalMoves(color: Color): boolean {
-    return this.board.getAllPieces()
-      .filter(p => p.color === color)
-      .some(piece => this.getLegalMoves(piece).length > 0)
   }
 
   isCheckmate(color: Color): boolean {
@@ -43,5 +39,23 @@ export class RulesEngine {
 
   isStalemate(color: Color): boolean {
     return !this.isKingInCheck(color) && !this.hasLegalMoves(color)
+  }
+
+  private isMoveLegal(move: MoveCommand, color: Color): boolean {
+    move.execute(this.board)
+    this.attackMapManager.recomputeAll()
+
+    const safe = !this.isKingInCheck(color)
+
+    move.undo(this.board)
+    this.attackMapManager.recomputeAll()
+
+    return safe
+  }
+
+  private hasLegalMoves(color: Color): boolean {
+    return this.board.getAllPieces()
+      .filter(p => p.color === color)
+      .some(piece => this.getLegalMoves(piece).length > 0)
   }
 }

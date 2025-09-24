@@ -407,10 +407,10 @@ describe('integration', () => {
       const game = createGame()
       executeMoves(game, [
         ['e2', 'e4'],
-        ['d7', 'd5'],
+        ['f7', 'f5'],
         ['e1', 'e2'],
-        ['d5', 'd4'],
-        ['e2', 'd3'],
+        ['f5', 'f4'],
+        ['e2', 'f3'],
         ['a7', 'a6'],
       ])
 
@@ -418,25 +418,25 @@ describe('integration', () => {
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
         8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        7  - ♙ ♙ ♙ ♙ - ♙ ♙ 
         6  ♙ - - - - - - - 
         5  - - - - - - - - 
-        4  - - - ♙ ♟ - - - 
-        3  - - - ♚ - - - - 
+        4  - - - - ♟ ♙ - - 
+        3  - - - - - ♚ - - 
         2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
         1  ♜ ♞ ♝ ♛ - ♝ ♞ ♜ 
            A B C D E F G H 
         "
       `)
 
-      game.executeMove(new Position('d3'), new Position('d4'))
+      game.executeMove(new Position('f3'), new Position('f4'))
       expect(renderGrid(game.getBoardSnapshot())).toMatchInlineSnapshot(`
         "
         8  ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-        7  - ♙ ♙ - ♙ ♙ ♙ ♙ 
+        7  - ♙ ♙ ♙ ♙ - ♙ ♙ 
         6  ♙ - - - - - - - 
         5  - - - - - - - - 
-        4  - - - ♚ ♟ - - - 
+        4  - - - - ♟ ♚ - - 
         3  - - - - - - - - 
         2  ♟ ♟ ♟ ♟ - ♟ ♟ ♟ 
         1  ♜ ♞ ♝ ♛ - ♝ ♞ ♜ 

@@ -1,4 +1,3 @@
-import type { Piece } from '@/engine/pieces/Piece'
 import { renderGrid } from 'tests/utils'
 import { setPiecesAtPositions } from 'tests/utils/board'
 import { describe, it } from 'vitest'
@@ -21,7 +20,7 @@ describe('rook legal moves (• moves, x capture)', () => {
 
     attackMap.recomputeAll()
 
-    const selected = board.getPieceAt(new Position('d4')) as Piece
+    const selected = board.getPieceAt(new Position('d4'))!
     const moves = rules.getLegalMoves(selected)
 
     expect(renderGrid(board.toSnapshot(), moves)).toMatchInlineSnapshot(`
